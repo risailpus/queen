@@ -1,0 +1,2805 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Royal Glow: Modern Queen Makeover</title>
+    <!-- Google Fonts: Playfair Display & Plus Jakarta Sans dengan fallback rapi -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ==========================================================================
+           DESIGN TOKENS: MODERN ROYAL PALACE (SOFT PINK ROSE & ROSE GOLD)
+           ========================================================================== */
+        :root {
+            --bg-marble: #FDF2F5;
+            --bg-marble-accent: #FCE7EE;
+            --card-glass: rgba(255, 248, 251, 0.88);
+            --card-border: rgba(219, 138, 165, 0.42);
+            
+            --gold-primary: #C86D8A;
+            --gold-light: #F2C4D4;
+            --gold-gradient: linear-gradient(135deg, #D97A98 0%, #F0B4C7 50%, #B85575 100%);
+            
+            --velvet-rose: #A63A5D;
+            --velvet-rose-soft: rgba(217, 122, 152, 0.16);
+            --royal-navy: #3D1E2B;
+            
+            --text-dark: #2E1922;
+            --text-muted: #785564;
+            --shadow-royal: 0 12px 36px rgba(166, 58, 93, 0.11);
+            --shadow-gold: 0 6px 20px rgba(200, 109, 138, 0.28);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-marble);
+            background-image: 
+                radial-gradient(circle at 12% 18%, rgba(247, 189, 209, 0.45) 0%, transparent 48%),
+                radial-gradient(circle at 88% 82%, rgba(227, 136, 168, 0.32) 0%, transparent 52%),
+                linear-gradient(155deg, #FFF6F9 0%, #FCE7EE 50%, #F8D8E3 100%);
+            color: var(--text-dark);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, .serif {
+            font-family: 'Playfair Display', Georgia, serif;
+        }
+
+        /* ==========================================================================
+           HEADER & AUDIO CONTROLLER (BRITISH RUNWAY CHIC)
+           ========================================================================== */
+        header {
+            width: 100%;
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 1rem 1.25rem 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .crown-emblem {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            background: var(--gold-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #FFF;
+            box-shadow: var(--shadow-gold);
+        }
+
+        .brand-title h1 {
+            font-size: 1.35rem;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            color: var(--royal-navy);
+        }
+
+        .brand-title p {
+            font-size: 0.76rem;
+            color: var(--text-muted);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .music-bar {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            background: var(--card-glass);
+            border: 1px solid var(--card-border);
+            padding: 0.45rem 0.85rem;
+            border-radius: 99px;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.04);
+            backdrop-filter: blur(8px);
+        }
+
+        .music-btn {
+            background: var(--royal-navy);
+            color: #FFF;
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.2s ease, background 0.2s ease;
+        }
+
+        .music-btn:hover {
+            transform: scale(1.06);
+            background: var(--velvet-rose);
+        }
+
+        .music-info {
+            display: flex;
+            flex-direction: column;
+            padding-right: 0.4rem;
+        }
+
+        .music-track {
+            font-size: 0.76rem;
+            font-weight: 600;
+            color: var(--royal-navy);
+        }
+
+        .music-sub {
+            font-size: 0.68rem;
+            color: var(--gold-primary);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .equalizer {
+            display: inline-flex;
+            align-items: flex-end;
+            gap: 2px;
+            height: 10px;
+        }
+
+        .equalizer span {
+            width: 2.5px;
+            height: 3px;
+            background: var(--velvet-rose);
+            border-radius: 2px;
+            transition: height 0.15s ease;
+        }
+
+        .equalizer.playing span:nth-child(1) { animation: eq 0.55s infinite alternate; }
+        .equalizer.playing span:nth-child(2) { animation: eq 0.4s infinite alternate 0.15s; }
+        .equalizer.playing span:nth-child(3) { animation: eq 0.65s infinite alternate 0.3s; }
+
+        @keyframes eq {
+            0% { height: 3px; }
+            100% { height: 10px; }
+        }
+
+        /* ==========================================================================
+           STEPPER NAVIGASI 5 TAHAP + FINALE
+           ========================================================================== */
+        .stepper-container {
+            width: 100%;
+            max-width: 1180px;
+            margin: 0.5rem auto;
+            padding: 0 1.25rem;
+        }
+
+        .stepper {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 0.45rem;
+            background: var(--card-glass);
+            border: 1px solid var(--card-border);
+            padding: 0.5rem;
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow-royal);
+        }
+
+        .step-pill {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+            padding: 0.55rem 0.4rem;
+            border-radius: 12px;
+            border: none;
+            background: transparent;
+            color: var(--text-muted);
+            font-family: inherit;
+            font-size: 0.78rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .step-pill .num {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: rgba(166, 58, 93, 0.14);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.72rem;
+        }
+
+        .step-pill.active {
+            background: var(--royal-navy);
+            color: #FFF;
+            box-shadow: 0 4px 12px rgba(61, 30, 43, 0.24);
+        }
+
+        .step-pill.active .num {
+            background: var(--gold-primary);
+            color: #FFF;
+        }
+
+        .step-pill.completed {
+            color: var(--velvet-rose);
+        }
+
+        .step-pill.completed .num {
+            background: var(--velvet-rose);
+            color: #FFF;
+        }
+
+        /* ==========================================================================
+           ARENA UTAMA: PANGGUNG AVATAR RATU & PANEL STUDIO
+           ========================================================================== */
+        .game-layout {
+            width: 100%;
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 0.5rem 1.25rem 2rem;
+            display: grid;
+            grid-template-columns: 1.05fr 1fr;
+            gap: 1.5rem;
+            flex: 1;
+            align-items: stretch;
+        }
+
+        /* Kartu Avatar Ratu */
+        .palace-stage {
+            position: relative;
+            border-radius: 24px;
+            border: 1.5px solid var(--card-border);
+            background: linear-gradient(180deg, #FFF7FA 0%, #F9DCE6 60%, #F3C6D6 100%);
+            box-shadow: var(--shadow-royal);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 540px;
+            transition: background 0.8s ease;
+        }
+
+        /* Mode Latar Belakang Grand Ballroom Pink Rose saat Finale */
+        .palace-stage.gala-mode {
+            background: radial-gradient(circle at 50% 24%, #7A2949 0%, #4A172C 65%, #2B0D19 100%);
+            border-color: #F2C4D4;
+        }
+
+        .stage-top-badge {
+            position: relative;
+            z-index: 10;
+            margin-top: 1rem;
+            padding: 0.4rem 1rem;
+            border-radius: 99px;
+            background: rgba(255, 245, 249, 0.88);
+            border: 1px solid var(--card-border);
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--royal-navy);
+            backdrop-filter: blur(6px);
+            display: flex;
+            align-items: center;
+            gap: 0.45rem;
+        }
+
+        /* Kontainer SVG Interaktif */
+        .queen-canvas-wrap {
+            position: relative;
+            width: 100%;
+            max-width: 480px;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 5;
+            cursor: pointer;
+            transition: max-width 0.5s ease;
+        }
+
+        .queen-canvas-wrap.duo-mode {
+            max-width: 560px;
+        }
+
+        #queen-svg {
+            width: 100%;
+            height: auto;
+            max-height: 455px;
+            filter: drop-shadow(0 12px 24px rgba(38, 34, 40, 0.12));
+        }
+
+        #queen-character-root {
+            transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        #escort-character-root {
+            transition: opacity 0.45s ease, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        #queen-svg {
+            width: 100%;
+            height: auto;
+            max-height: 455px;
+            filter: drop-shadow(0 12px 24px rgba(38, 34, 40, 0.12));
+        }
+
+        /* Kursor Alat Skincare Melayang saat Aktif */
+        #floating-tool {
+            position: absolute;
+            pointer-events: none;
+            z-index: 30;
+            font-size: 2rem;
+            transform: translate(-50%, -50%);
+            display: none;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
+            transition: transform 0.08s ease;
+        }
+
+        /* Layer Efek Partikel Kilau & Gelembung */
+        #fx-layer {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 25;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+            animation: floatUp 0.9s ease-out forwards;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translate(-50%, -50%) scale(0.4); opacity: 1; }
+            100% { transform: translate(-50%, -140%) scale(1.3); opacity: 0; }
+        }
+
+        /* Kilatan Kamera saat Finale */
+        .camera-flash {
+            position: absolute;
+            inset: 0;
+            background: #FFF;
+            opacity: 0;
+            pointer-events: none;
+            z-index: 40;
+        }
+
+        .camera-flash.flash-anim {
+            animation: flashBurst 0.65s ease-out;
+        }
+
+        @keyframes flashBurst {
+            0% { opacity: 0.85; }
+            100% { opacity: 0; }
+        }
+
+        /* Dialog Visual Novel di Bawah Avatar */
+        .dialogue-box {
+            position: relative;
+            z-index: 15;
+            width: calc(100% - 2rem);
+            margin-bottom: 1rem;
+            background: rgba(255, 246, 250, 0.94);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 0.85rem 1.1rem;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 6px 20px rgba(166, 58, 93, 0.1);
+        }
+
+        .dialogue-speaker {
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--velvet-rose);
+            margin-bottom: 0.2rem;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .dialogue-text {
+            font-size: 0.86rem;
+            line-height: 1.45;
+            color: var(--text-dark);
+        }
+
+        /* ==========================================================================
+           PANEL KONTROL MAKEOVER (KANAN)
+           ========================================================================== */
+        .studio-panel {
+            background: var(--card-glass);
+            border: 1.5px solid var(--card-border);
+            border-radius: 24px;
+            padding: 1.5rem;
+            backdrop-filter: blur(12px);
+            box-shadow: var(--shadow-royal);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 1.25rem;
+        }
+
+        .panel-header h2 {
+            font-size: 1.45rem;
+            color: var(--royal-navy);
+            margin-bottom: 0.25rem;
+        }
+
+        .panel-header p {
+            font-size: 0.86rem;
+            color: var(--text-muted);
+        }
+
+        /* Progress Bar Khusus Skincare */
+        .skincare-meter {
+            background: rgba(217, 122, 152, 0.14);
+            border-radius: 14px;
+            padding: 0.85rem 1rem;
+            margin-top: 0.75rem;
+            border: 1px solid rgba(217, 122, 152, 0.32);
+        }
+
+        .meter-top {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 0.45rem;
+            color: var(--royal-navy);
+        }
+
+        .meter-track {
+            width: 100%;
+            height: 10px;
+            background: rgba(255,255,255,0.85);
+            border-radius: 99px;
+            overflow: hidden;
+        }
+
+        .meter-fill {
+            height: 100%;
+            width: 0%;
+            background: var(--gold-gradient);
+            border-radius: 99px;
+            transition: width 0.35s ease;
+        }
+
+        /* Grid Pilihan Alat & Item Fashion */
+        .control-section {
+            margin-bottom: 1rem;
+        }
+
+        .section-label {
+            font-size: 0.78rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--text-muted);
+            margin-bottom: 0.55rem;
+            display: block;
+        }
+
+        .tool-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.65rem;
+        }
+
+        .tool-card {
+            background: #FFF9FB;
+            border: 1.5px solid rgba(219, 138, 165, 0.34);
+            border-radius: 14px;
+            padding: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            cursor: pointer;
+            text-align: left;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        .tool-card:hover {
+            border-color: var(--gold-primary);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 14px rgba(200, 109, 138, 0.18);
+        }
+
+        .tool-card.active {
+            border-color: var(--velvet-rose);
+            background: var(--velvet-rose-soft);
+            box-shadow: 0 4px 14px rgba(166, 58, 93, 0.18);
+        }
+
+        .dialogue-speaker {
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--velvet-rose);
+            margin-bottom: 0.2rem;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .dialogue-text {
+            font-size: 0.86rem;
+            line-height: 1.45;
+            color: var(--text-dark);
+        }
+
+        /* ==========================================================================
+           PANEL KONTROL MAKEOVER (KANAN)
+           ========================================================================== */
+        .studio-panel {
+            background: var(--card-glass);
+            border: 1.5px solid var(--card-border);
+            border-radius: 24px;
+            padding: 1.5rem;
+            backdrop-filter: blur(12px);
+            box-shadow: var(--shadow-royal);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 1.25rem;
+        }
+
+        .panel-header h2 {
+            font-size: 1.45rem;
+            color: var(--royal-navy);
+            margin-bottom: 0.25rem;
+        }
+
+        .panel-header p {
+            font-size: 0.86rem;
+            color: var(--text-muted);
+        }
+
+        /* Progress Bar Khusus Skincare */
+        .skincare-meter {
+            background: rgba(184, 138, 68, 0.12);
+            border-radius: 14px;
+            padding: 0.85rem 1rem;
+            margin-top: 0.75rem;
+            border: 1px solid rgba(184, 138, 68, 0.25);
+        }
+
+        .meter-top {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 0.45rem;
+            color: var(--royal-navy);
+        }
+
+        .meter-track {
+            width: 100%;
+            height: 10px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 99px;
+            overflow: hidden;
+        }
+
+        .meter-fill {
+            height: 100%;
+            width: 0%;
+            background: var(--gold-gradient);
+            border-radius: 99px;
+            transition: width 0.35s ease;
+        }
+
+        /* Grid Pilihan Alat & Item Fashion */
+        .control-section {
+            margin-bottom: 1rem;
+        }
+
+        .section-label {
+            font-size: 0.78rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--text-muted);
+            margin-bottom: 0.55rem;
+            display: block;
+        }
+
+        .tool-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.65rem;
+        }
+
+        .tool-card {
+            background: #FFF;
+            border: 1.5px solid rgba(197, 155, 95, 0.28);
+            border-radius: 14px;
+            padding: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            cursor: pointer;
+            text-align: left;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        .tool-card:hover {
+            border-color: var(--gold-primary);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 14px rgba(184, 138, 68, 0.14);
+        }
+
+        .tool-card.active {
+            border-color: var(--velvet-rose);
+            background: var(--velvet-rose-soft);
+            box-shadow: 0 4px 14px rgba(158, 71, 97, 0.16);
+        }
+
+        .tool-card.done::after {
+            content: '✓';
+            position: absolute;
+            top: 8px;
+            right: 10px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #3D8B68;
+            color: #FFF;
+            font-size: 0.72rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tool-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 11px;
+            background: var(--bg-marble);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+
+        .tool-meta strong {
+            display: block;
+            font-size: 0.85rem;
+            color: var(--royal-navy);
+        }
+
+        .tool-meta span {
+            font-size: 0.74rem;
+            color: var(--text-muted);
+        }
+
+        /* Swatch Warna Makeup & Rambut */
+        .swatch-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.55rem;
+        }
+
+        .swatch-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            padding: 0.45rem 0.75rem;
+            border-radius: 99px;
+            background: #FFF9FB;
+            border: 1.5px solid rgba(219, 138, 165, 0.36);
+            font-family: inherit;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--text-dark);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .swatch-btn:hover {
+            border-color: var(--gold-primary);
+        }
+
+        .swatch-btn.active {
+            border-color: var(--royal-navy);
+            background: var(--royal-navy);
+            color: #FFF;
+        }
+
+        .color-dot {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            border: 1px solid rgba(0,0,0,0.15);
+            flex-shrink: 0;
+        }
+
+        /* Kartu Finale / Hasil Penilaian Gala */
+        .finale-card {
+            background: linear-gradient(145deg, #FFF9FB 0%, #FCE6EE 100%);
+            border: 1.5px solid var(--gold-primary);
+            border-radius: 18px;
+            padding: 1.25rem;
+            text-align: center;
+        }
+
+        .rank-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 99px;
+            background: var(--gold-gradient);
+            color: #FFF;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            margin-bottom: 0.45rem;
+            box-shadow: 0 3px 10px rgba(200, 109, 138, 0.25);
+        }
+
+        .couple-title-tag {
+            display: inline-block;
+            margin-top: 0.25rem;
+            padding: 0.28rem 0.85rem;
+            border-radius: 99px;
+            background: var(--velvet-rose-soft);
+            color: var(--velvet-rose);
+            font-size: 0.78rem;
+            font-weight: 700;
+        }
+
+        .escort-card {
+            background: #FFF9FB;
+            border: 1.5px solid rgba(219, 138, 165, 0.34);
+            border-radius: 16px;
+            padding: 0.85rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.45rem;
+            cursor: pointer;
+            text-align: left;
+            transition: all 0.22s ease;
+            position: relative;
+        }
+
+        .escort-card:hover {
+            border-color: var(--gold-primary);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 18px rgba(200, 109, 138, 0.18);
+        }
+
+        .escort-card.active {
+            border-color: var(--velvet-rose);
+            background: linear-gradient(145deg, #FFF5F8 0%, #FCE3EC 100%);
+            box-shadow: 0 6px 18px rgba(166, 58, 93, 0.2);
+        }
+
+        .swatch-btn:hover {
+            border-color: var(--gold-primary);
+        }
+
+        .swatch-btn.active {
+            border-color: var(--royal-navy);
+            background: var(--royal-navy);
+            color: #FFF;
+        }
+
+        .color-dot {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            border: 1px solid rgba(0,0,0,0.15);
+            flex-shrink: 0;
+        }
+
+        /* Kartu Finale / Hasil Penilaian Gala */
+        .finale-card {
+            background: linear-gradient(145deg, #FFFDFB 0%, #F7ECE4 100%);
+            border: 1.5px solid var(--gold-primary);
+            border-radius: 18px;
+            padding: 1.25rem;
+            text-align: center;
+        }
+
+        .couple-title-tag {
+            display: inline-block;
+            margin-top: 0.25rem;
+            padding: 0.28rem 0.85rem;
+            border-radius: 99px;
+            background: var(--velvet-rose-soft);
+            color: var(--velvet-rose);
+            font-size: 0.78rem;
+            font-weight: 700;
+        }
+
+        .escort-card {
+            background: #FFF;
+            border: 1.5px solid rgba(197, 155, 95, 0.28);
+            border-radius: 16px;
+            padding: 0.85rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.45rem;
+            cursor: pointer;
+            text-align: left;
+            transition: all 0.22s ease;
+            position: relative;
+        }
+
+        .escort-card:hover {
+            border-color: var(--gold-primary);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 18px rgba(184, 138, 68, 0.16);
+        }
+
+        .escort-card.active {
+            border-color: var(--velvet-rose);
+            background: linear-gradient(145deg, #FFF8FA 0%, #FCEEF2 100%);
+            box-shadow: 0 6px 18px rgba(158, 71, 97, 0.18);
+        }
+
+        .escort-card-top {
+            display: flex;
+            align-items: center;
+            gap: 0.65rem;
+        }
+
+        .escort-avatar-badge {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.35rem;
+            color: #FFF;
+            flex-shrink: 0;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+        }
+
+        .escort-meta strong {
+            display: block;
+            font-size: 0.88rem;
+            color: var(--royal-navy);
+            line-height: 1.25;
+        }
+
+        .escort-meta span {
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: var(--gold-primary);
+        }
+
+        .escort-desc {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        .finale-card h3 {
+            font-size: 1.5rem;
+            color: var(--royal-navy);
+            margin-bottom: 0.4rem;
+        }
+
+        .score-pills {
+            display: flex;
+            justify-content: center;
+            gap: 0.75rem;
+            margin: 1rem 0;
+            flex-wrap: wrap;
+        }
+
+        .score-item {
+            background: #FFF9FB;
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 0.55rem 0.9rem;
+            min-width: 95px;
+        }
+
+        .score-item strong {
+            display: block;
+            font-size: 1.1rem;
+            color: var(--velvet-rose);
+        }
+
+        .score-item span {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+        }
+
+        /* Tombol Navigasi Bawah Panel */
+        .panel-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.75rem;
+            padding-top: 0.75rem;
+            border-top: 1px solid rgba(219, 138, 165, 0.32);
+        }
+
+        .btn-royal {
+            padding: 0.75rem 1.35rem;
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 0.88rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.45rem;
+            transition: all 0.2s ease;
+        }
+
+        .btn-prev {
+            background: rgba(166, 58, 93, 0.1);
+            color: var(--royal-navy);
+        }
+
+        .btn-prev:hover {
+            background: rgba(166, 58, 93, 0.18);
+        }
+
+        .btn-next {
+            background: var(--gold-gradient);
+            color: #FFF;
+            box-shadow: var(--shadow-gold);
+            flex: 1;
+        }
+
+        .btn-next:hover {
+            transform: translateY(-1px);
+            filter: brightness(1.04);
+        }
+
+        /* ==========================================================================
+           MODAL PEMBUKA (PROLOG CERITA KERAJAAN MODERN)
+           ========================================================================== */
+        .intro-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(54, 21, 35, 0.68);
+            backdrop-filter: blur(8px);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.25rem;
+            transition: opacity 0.35s ease;
+        }
+
+        .intro-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .intro-modal {
+            background: linear-gradient(165deg, #FFF8FA 0%, #FCE4EC 100%);
+            border: 2px solid var(--gold-light);
+            border-radius: 26px;
+            max-width: 520px;
+            width: 100%;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 24px 60px rgba(46, 15, 28, 0.35);
+        }
+
+        .score-item strong {
+            display: block;
+            font-size: 1.1rem;
+            color: var(--velvet-rose);
+        }
+
+        .score-item span {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+        }
+
+        /* Tombol Navigasi Bawah Panel */
+        .panel-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.75rem;
+            padding-top: 0.75rem;
+            border-top: 1px solid rgba(197, 155, 95, 0.25);
+        }
+
+        .btn-royal {
+            padding: 0.75rem 1.35rem;
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 0.88rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.45rem;
+            transition: all 0.2s ease;
+        }
+
+        .btn-prev {
+            background: rgba(30, 36, 54, 0.07);
+            color: var(--royal-navy);
+        }
+
+        .btn-prev:hover {
+            background: rgba(30, 36, 54, 0.14);
+        }
+
+        .btn-next {
+            background: var(--gold-gradient);
+            color: #FFF;
+            box-shadow: var(--shadow-gold);
+            flex: 1;
+        }
+
+        .btn-next:hover {
+            transform: translateY(-1px);
+            filter: brightness(1.04);
+        }
+
+        /* ==========================================================================
+           MODAL PEMBUKA (PROLOG CERITA KERAJAAN MODERN)
+           ========================================================================== */
+        .intro-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(24, 21, 28, 0.72);
+            backdrop-filter: blur(8px);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.25rem;
+            transition: opacity 0.35s ease;
+        }
+
+        .intro-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .intro-modal {
+            background: linear-gradient(165deg, #FFFDFB 0%, #F5EAE3 100%);
+            border: 2px solid var(--gold-light);
+            border-radius: 26px;
+            max-width: 520px;
+            width: 100%;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.32);
+        }
+
+        .intro-crest {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 1rem;
+            border-radius: 20px;
+            background: var(--gold-gradient);
+            color: #FFF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow-gold);
+        }
+
+        .intro-modal h2 {
+            font-size: 1.75rem;
+            color: var(--royal-navy);
+            margin-bottom: 0.5rem;
+        }
+
+        .intro-modal p {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            line-height: 1.65;
+            margin-bottom: 1.5rem;
+        }
+
+        /* ==========================================================================
+           RESPONSIF MOBILE & TABLET
+           ========================================================================== */
+        @media (max-width: 900px) {
+            .game-layout {
+                grid-template-columns: 1fr;
+            }
+            .palace-stage {
+                min-height: 450px;
+            }
+            .step-pill span.label-text {
+                display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .tool-grid {
+                grid-template-columns: 1fr;
+            }
+            .brand-title h1 {
+                font-size: 1.15rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Modal Pembuka Cerita Kerajaan Modern -->
+<div class="intro-overlay" id="intro-modal">
+    <div class="intro-modal">
+        <div class="intro-crest">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M2 4l3 12h14l3-12-6 7-4-7-4 7-6-7zm3 16h14"></path>
+            </svg>
+        </div>
+        <p style="font-size:0.75rem; font-weight:700; letter-spacing:0.12em; color:var(--velvet-rose); margin-bottom:0.35rem; text-transform:uppercase;">Istana Kensington Modern • London</p>
+        <h2>Royal Gala Malam Ini!</h2>
+        <p>
+            Yang Mulia <strong>Ratu Eleanor</strong> harus menghadiri <em>Perjamuan Diplomatik & Gala Kerajaan</em> dalam dua jam lagi! Sayangnya, jadwal padat membuat kulit wajahnya mengalami <strong>breakout</strong> dan tampak lelah.<br><br>
+            Sebagai <strong>Royal Stylist</strong> pribadinya, rawat kulit sang Ratu hingga mulus bercahaya, lalu rias dan pilihkan busana kerajaan modern terbaik!
+        </p>
+        <button class="btn-royal btn-next" id="btn-start-game" style="width:100%; padding:0.9rem; font-size:0.95rem;">
+            Mulai Persiapan & Putar Musik Runway ✨
+        </button>
+    </div>
+</div>
+
+<!-- Header & Pemutar Musik British Pop Runway -->
+<header>
+    <div class="brand">
+        <div class="crown-emblem">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M2 4l3 12h14l3-12-6 7-4-7-4 7-6-7zm3 16h14"></path>
+            </svg>
+        </div>
+        <div class="brand-title">
+            <h1>Royal Glow</h1>
+            <p>Modern Queen Makeover Studio</p>
+        </div>
+    </div>
+
+    <div class="music-bar">
+        <button class="music-btn" id="btn-music-toggle" title="Putar / Jeda Musik London Runway">
+            <svg id="icon-play" width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+            </svg>
+            <svg id="icon-pause" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="display:none;">
+                <rect x="6" y="4" width="4" height="16"></rect>
+                <rect x="14" y="4" width="4" height="16"></rect>
+            </svg>
+        </button>
+<!-- Stepper 5 Tahap + Finale -->
+<nav class="stepper-container" aria-label="Tahapan Makeover">
+    <div class="stepper" id="stepper-nav">
+        <button class="step-pill active" data-step="0">
+            <span class="num">1</span>
+            <span class="label-text">Perawatan</span>
+        </button>
+        <button class="step-pill" data-step="1">
+            <span class="num">2</span>
+            <span class="label-text">Riasan</span>
+        </button>
+        <button class="step-pill" data-step="2">
+            <span class="num">3</span>
+            <span class="label-text">Rambut & Mahkota</span>
+        </button>
+        <button class="step-pill" data-step="3">
+            <span class="num">4</span>
+            <span class="label-text">Busana Gala</span>
+        </button>
+        <button class="step-pill" data-step="4">
+            <span class="num">5</span>
+            <span class="label-text">Pasangan</span>
+        </button>
+        <button class="step-pill" data-step="5">
+            <span class="num">★</span>
+            <span class="label-text">Grand Finale</span>
+        </button>
+    </div>
+</nav>
+
+<!-- Area Utama Game -->
+<main class="game-layout">
+    <!-- Kiri: Panggung Karakter Ratu & Pasangan Interaktif -->
+    <section class="palace-stage" id="palace-stage">
+        <div class="camera-flash" id="camera-flash"></div>
+        <div id="fx-layer"></div>
+        <div id="floating-tool">🫧</div>
+
+        <div class="stage-top-badge" id="stage-location">
+            <span>🏛️</span>
+            <span id="location-label">Royal Suite • Ruang Perawatan Istana</span>
+        </div>
+
+        <div class="queen-canvas-wrap" id="queen-interact-zone">
+            <!-- Ilustrasi SVG Berlapis Tinggi untuk Ratu Eleanor & Pasangan Kerajaan -->
+            <svg id="queen-svg" viewBox="0 0 540 480" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <!-- Gradasi Kulit Wajah Ratu (Dull -> Glowing) -->
+                    <radialGradient id="skin-grad" cx="50%" cy="42%" r="55%">
+                        <stop offset="0%" id="skin-stop-1" stop-color="#E8C3B0"/>
+                        <stop offset="70%" id="skin-stop-2" stop-color="#D9AC96"/>
+                        <stop offset="100%" id="skin-stop-3" stop-color="#C7967E"/>
+                    </radialGradient>
+
+                    <!-- Gradasi Kulit Pasangan Pria -->
+                    <radialGradient id="escort-skin-grad" cx="50%" cy="42%" r="55%">
+                        <stop offset="0%" stop-color="#ECC7B2"/>
+                        <stop offset="75%" stop-color="#D8AB92"/>
+                        <stop offset="100%" stop-color="#C29178"/>
+                    </radialGradient>
+
+                    <!-- Gradasi Rambut Ratu -->
+                    <linearGradient id="hair-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" id="hair-stop-1" stop-color="#5C3A28"/>
+                        <stop offset="50%" id="hair-stop-2" stop-color="#3E2417"/>
+                        <stop offset="100%" id="hair-stop-3" stop-color="#26140C"/>
+                    </linearGradient>
+
+                    <!-- Gradasi Emas Mahkota -->
+                    <linearGradient id="gold-metal" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#F7E3B5"/>
+                        <stop offset="50%" stop-color="#C99B4B"/>
+                        <stop offset="100%" stop-color="#8F6722"/>
+                    </linearGradient>
+
+                    <!-- Kilau Pipi / Highlighter -->
+                    <radialGradient id="glow-highlight" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" stop-color="#FFF8EC" stop-opacity="0.75"/>
+                        <stop offset="100%" stop-color="#FFF8EC" stop-opacity="0"/>
+                    </radialGradient>
+
+                    <!-- Karpet Merah & Cahaya Sorot Grand Finale -->
+                    <linearGradient id="red-carpet-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#B0305B" stop-opacity="0"/>
+                        <stop offset="35%" stop-color="#C93B6B" stop-opacity="0.72"/>
+                        <stop offset="100%" stop-color="#871B40" stop-opacity="0.96"/>
+                    </linearGradient>
+                </defs>
+
+                <!-- Latar Belakang Dekorasi Arsitektur Modern Istana -->
+                <g id="bg-architecture" opacity="0.6">
+                    <path d="M90 480 L90 150 Q270 30 450 150 L450 480" fill="none" stroke="#D97A98" stroke-width="1.5"/>
+                    <path d="M115 480 L115 165 Q270 55 425 165 L425 480" fill="none" stroke="#D97A98" stroke-width="0.9" stroke-dasharray="4 4"/>
+                    <!-- Lampu Gantung Kristal Minimalis -->
+                    <line x1="270" y1="0" x2="270" y2="42" stroke="#D97A98" stroke-width="1.5"/>
+                    <circle cx="270" cy="48" r="7" fill="#FAD2E0" stroke="#D97A98" stroke-width="1.2"/>
+                    <path d="M235 48 Q270 62 305 48" fill="none" stroke="#D97A98" stroke-width="1"/>
+                </g>
+
+                <!-- Dekorasi Karpet Merah & Bingkai Gala (Aktif saat Finale) -->
+                <g id="gala-backdrop-layer" opacity="0" style="transition: opacity 0.6s ease;">
+                    <polygon points="150,310 390,310 520,480 20,480" fill="url(#red-carpet-grad)"/>
+                    <line x1="150" y1="310" x2="20" y2="480" stroke="#F5C6D6" stroke-width="2"/>
+                    <line x1="390" y1="310" x2="520" y2="480" stroke="#F5C6D6" stroke-width="2"/>
+                    <!-- Bingkai Foto Kerajaan di tepi kanvas -->
+                    <rect x="16" y="14" width="508" height="452" rx="18" fill="none" stroke="#F2C4D4" stroke-width="2.5" opacity="0.8"/>
+                </g>
+
+                <!-- Dekorasi Karpet Merah & Bingkai Gala (Aktif saat Finale) -->
+                <g id="gala-backdrop-layer" opacity="0" style="transition: opacity 0.6s ease;">
+                    <polygon points="150,310 390,310 520,480 20,480" fill="url(#red-carpet-grad)"/>
+                    <line x1="150" y1="310" x2="20" y2="480" stroke="#DFC08A" stroke-width="2"/>
+                    <line x1="390" y1="310" x2="520" y2="480" stroke="#DFC08A" stroke-width="2"/>
+                    <!-- Bingkai Foto Kerajaan di tepi kanvas -->
+                    <rect x="16" y="14" width="508" height="452" rx="18" fill="none" stroke="url(#gold-metal)" stroke-width="2.5" opacity="0.75"/>
+                </g>
+
+                <!-- ================================================================
+                     KARAKTER PASANGAN KERAJAAN (MUNCUL DI TAHAP 5 & GRAND FINALE)
+                     ================================================================ -->
+                <g id="escort-character-root" transform="translate(215, 12)" opacity="0" pointer-events="none">
+                    <!-- Konten SVG Pasangan dirender dinamis sesuai pilihan -->
+                </g>
+
+                <!-- ================================================================
+                     KARAKTER UTAMA: RATU ELEANOR (DEFAULT TERPUSAT DI X+70)
+                     ================================================================ -->
+                <g id="queen-character-root" transform="translate(70, 0)">
+                    <!-- LAYER 1: RAMBUT BELAKANG -->
+                    <g id="hair-back-layer">
+                        <path d="M115 160 C95 230, 90 340, 118 420 C145 435, 255 435, 282 420 C310 340, 305 230, 285 160 Z" fill="url(#hair-grad)"/>
+                    </g>
+
+                    <!-- LAYER 2: LEHER, BAHU & TUBUH -->
+                    <g id="body-layer">
+                        <path d="M172 248 L172 305 C140 315, 92 332, 78 375 L68 480 L332 480 L322 375 C308 332, 260 315, 228 305 L228 248 Z" fill="url(#skin-grad)"/>
+                        <path d="M172 252 Q200 274 228 252 L228 272 Q200 286 172 272 Z" fill="#B58068" opacity="0.32"/>
+                        <path d="M132 332 Q165 342 192 335 M268 332 Q235 342 208 335" fill="none" stroke="#BA856D" stroke-width="1.5" stroke-linecap="round" opacity="0.45"/>
+                    </g>
+
+                    <!-- LAYER 3: BUSANA / GAUN KERAJAAN MODERN -->
+                    <g id="outfit-layer">
+                        <path d="M84 360 C115 345, 155 348, 200 375 C245 348, 285 345, 316 360 L334 480 L66 480 Z" fill="#EBDAD5" stroke="#D1B7B0" stroke-width="1.5"/>
+                        <path d="M148 352 L200 415 L252 352" fill="none" stroke="#C99E57" stroke-width="2"/>
+                    </g>
+
+                    <!-- LAYER 4: SARUNG TANGAN & CLUTCH AKSESORI -->
+                    <g id="fashion-acc-layer"></g>
+
+                    <!-- LAYER 5: KALUNG & ANTING -->
+                    <g id="jewelry-layer"></g>
+
+                    <!-- LAYER 6: BENTUK WAJAH & TELINGA -->
+                    <g id="face-base-layer">
+                        <ellipse cx="126" cy="186" rx="11" ry="18" fill="url(#skin-grad)"/>
+                        <ellipse cx="274" cy="186" rx="11" ry="18" fill="url(#skin-grad)"/>
+                        <path d="M128 155 C128 102, 272 102, 272 155 C272 215, 244 256, 200 262 C156 256, 128 215, 128 155 Z" fill="url(#skin-grad)"/>
+                    </g>
+
+                    <!-- LAYER 7: SKINCARE & MASALAH KULIT (BREAKOUT -> GLOWING) -->
+                    <g id="skincare-layer">
+                        <ellipse id="skin-dullness" cx="200" cy="185" rx="64" ry="70" fill="#8C735B" opacity="0.24"/>
+                        <g id="dark-circles" opacity="0.55">
+                            <path d="M148 188 Q166 198 184 188" fill="none" stroke="#7A5B6B" stroke-width="5" stroke-linecap="round"/>
+                            <path d="M216 188 Q234 198 252 188" fill="none" stroke="#7A5B6B" stroke-width="5" stroke-linecap="round"/>
+                        </g>
+                        <g id="blemishes-group">
+                            <g class="blemish" data-id="1" transform="translate(154, 206)">
+                                <circle r="6.5" fill="#D95B5B" opacity="0.72"/>
+                                <circle r="2.2" fill="#F7B2B2"/>
+                            </g>
+                            <g class="blemish" data-id="2" transform="translate(244, 212)">
+                                <circle r="7" fill="#D95B5B" opacity="0.75"/>
+                                <circle r="2.4" fill="#F7B2B2"/>
+                            </g>
+                            <g class="blemish" data-id="3" transform="translate(172, 232)">
+                                <circle r="5.5" fill="#D95B5B" opacity="0.68"/>
+                                <circle r="1.8" fill="#F7B2B2"/>
+                            </g>
+                            <g class="blemish" data-id="4" transform="translate(226, 235)">
+                                <circle r="6" fill="#D95B5B" opacity="0.7"/>
+                                <circle r="2" fill="#F7B2B2"/>
+                            </g>
+                            <g class="blemish" data-id="5" transform="translate(202, 142)">
+                                <circle r="5.5" fill="#D95B5B" opacity="0.65"/>
+                                <circle r="1.8" fill="#F7B2B2"/>
+                            </g>
+                        </g>
+                        <g id="healthy-glow" opacity="0">
+                            <ellipse cx="155" cy="196" rx="16" ry="9" fill="url(#glow-highlight)"/>
+                            <ellipse cx="245" cy="196" rx="16" ry="9" fill="url(#glow-highlight)"/>
+                            <ellipse cx="200" cy="178" rx="6" ry="18" fill="url(#glow-highlight)"/>
+                        </g>
+                        <path id="gold-mask-overlay" d="M133 158 C133 110, 267 110, 267 158 C267 212, 242 250, 200 256 C158 250, 133 212, 133 158 Z" fill="url(#gold-metal)" opacity="0" pointer-events="none"/>
+                    </g>
+
+                    <!-- LAYER 8: MAKEUP (EYESHADOW, BLUSH, LIPSTICK, EYELASHES) -->
+                    <g id="makeup-layer">
+                        <ellipse id="makeup-eyeshadow-l" cx="166" cy="172" rx="18" ry="9" fill="#D4AF7A" opacity="0"/>
+                        <ellipse id="makeup-eyeshadow-r" cx="234" cy="172" rx="18" ry="9" fill="#D4AF7A" opacity="0"/>
+                        <ellipse id="makeup-blush-l" cx="152" cy="202" rx="16" ry="10" fill="#E68A99" opacity="0"/>
+                        <ellipse id="makeup-blush-r" cx="248" cy="202" rx="16" ry="10" fill="#E68A99" opacity="0"/>
+                    </g>
+
+                    <!-- LAYER 9: FITUR WAJAH (MATA, ALIS, HIDUNG, BIBIR) -->
+                    <g id="facial-features">
+                        <path id="brow-l" d="M146 161 Q166 153 184 160" fill="none" stroke="#3D261A" stroke-width="3" stroke-linecap="round"/>
+                        <path id="brow-r" d="M216 160 Q234 153 254 161" fill="none" stroke="#3D261A" stroke-width="3" stroke-linecap="round"/>
+
+                        <g id="eye-left">
+                            <ellipse cx="166" cy="176" rx="14" ry="8.5" fill="#FFFFFF"/>
+                            <circle cx="166" cy="176" r="6" fill="#465E6E"/>
+                            <circle cx="166" cy="176" r="3" fill="#181F26"/>
+                            <circle cx="168" cy="174" r="1.8" fill="#FFFFFF"/>
+                            <path d="M151 175 Q166 165 181 175" fill="none" stroke="#241914" stroke-width="2.4" stroke-linecap="round"/>
+                            <path id="lashes-l" d="M151 174 L146 169 M156 171 L153 166" fill="none" stroke="#1E1612" stroke-width="1.8" stroke-linecap="round" opacity="0"/>
+                        </g>
+
+                        <g id="eye-right">
+                            <ellipse cx="234" cy="176" rx="14" ry="8.5" fill="#FFFFFF"/>
+                            <circle cx="234" cy="176" r="6" fill="#465E6E"/>
+                            <circle cx="234" cy="176" r="3" fill="#181F26"/>
+                            <circle cx="236" cy="174" r="1.8" fill="#FFFFFF"/>
+                            <path d="M219 175 Q234 165 249 175" fill="none" stroke="#241914" stroke-width="2.4" stroke-linecap="round"/>
+                            <path id="lashes-r" d="M249 174 L254 169 M244 171 L247 166" fill="none" stroke="#1E1612" stroke-width="1.8" stroke-linecap="round" opacity="0"/>
+                        </g>
+
+                        <path d="M200 178 L197 202 Q200 206 205 202" fill="none" stroke="#B8826B" stroke-width="1.8" stroke-linecap="round"/>
+
+                        <g id="lips-group">
+                            <path id="lip-upper" d="M182 225 Q192 219 200 223 Q208 219 218 225 Q200 228 182 225 Z" fill="#C97C7C"/>
+                            <path id="lip-lower" d="M182 225 Q200 238 218 225 Q200 228 182 225 Z" fill="#D68A8A"/>
+                            <ellipse cx="200" cy="230" rx="6" ry="1.6" fill="#FFFFFF" opacity="0.35"/>
+                        </g>
+                    </g>
+
+                    <!-- LAYER 10: RAMBUT DEPAN / PONI -->
+                    <g id="hair-front-layer">
+                        <path d="M126 162 C126 105, 274 105, 274 162 C264 128, 228 122, 200 134 C172 122, 136 128, 126 162 Z" fill="url(#hair-grad)"/>
+                    </g>
+
+                    <!-- LAYER 11: MAHKOTA / TIARA KERAJAAN -->
+                    <g id="tiara-layer"></g>
+                </g>
+            </svg>
+        </div>
+
+        <!-- Kotak Dialog Royal Stylist / Ratu Eleanor / Pasangan -->
+        <div class="dialogue-box">
+            <div class="dialogue-speaker">
+                <span id="speaker-name">✨ Madame Claire — Royal Stylist</span>
+                <span id="step-counter-text">Tahap 1 / 5</span>
+            </div>
+            <p class="dialogue-text" id="dialogue-text">
+                "Selamat datang di Royal Suite! Pertama, klik alat perawatan di kanan lalu usapkan atau klik pada wajah Ratu Eleanor untuk menyembuhkan breakout-nya."
+            </p>
+        </div>
+    </section>
+
+    <!-- Kanan: Panel Studio Makeover Dinamis -->
+    <section class="studio-panel" id="studio-panel">
+        <!-- Konten dirender dinamis oleh JavaScript sesuai tahap aktif -->
+    </section>
+</main>
+
+<script>
+/**
+ * ============================================================================
+ * 1. SYNTHESIZER MUSIK LATAR BERGAYA BRITISH POP / LONDON RUNWAY (WEB AUDIO API)
+ * ============================================================================
+ */
+class LondonRunwaySynth {
+    constructor() {
+        this.ctx = null;
+        this.isPlaying = false;
+        this.step = 0;
+        this.timer = null;
+        this.tempo = 116; // BPM upbeat modern pop runway
+        
+        // Progresi akor stylish UK Pop (Fmaj7 -> Em7 -> Dm7 -> Cmaj7)
+        this.chords = [
+            [174.61, 220.00, 261.63, 329.63], // Fmaj7
+            [164.81, 196.00, 246.94, 293.66], // Em7
+            [146.83, 174.61, 220.00, 261.63], // Dm7
+            [130.81, 164.81, 196.00, 246.94]  // Cmaj7
+        ];
+        // Bassline groovy
+        this.bassNotes = [87.31, 82.41, 73.42, 65.41];
+    }
+
+    init() {
+        if (!this.ctx) {
+            const AudioCtx = window.AudioContext || window.webkitAudioContext;
+            if (AudioCtx) this.ctx = new AudioCtx();
+        }
+    }
+
+    toggle() {
+        if (this.isPlaying) {
+            this.stop();
+        } else {
+            this.start();
+        }
+        return this.isPlaying;
+    }
+
+    start() {
+        this.init();
+        if (!this.ctx) return;
+        if (this.ctx.state === 'suspended') this.ctx.resume();
+        if (this.isPlaying) return;
+
+        this.isPlaying = true;
+        this.updateUI(true);
+        const stepDurationMs = (60 / this.tempo / 2) * 1000; // 8th notes
+
+        this.playStep();
+        this.timer = setInterval(() => this.playStep(), stepDurationMs);
+    }
+
+    stop() {
+        this.isPlaying = false;
+        clearInterval(this.timer);
+        this.updateUI(false);
+    }
+
+    updateUI(playing) {
+        const iconPlay = document.getElementById('icon-play');
+        const iconPause = document.getElementById('icon-pause');
+        const eq = document.getElementById('eq-bars');
+        const status = document.getElementById('music-status-text');
+
+        iconPlay.style.display = playing ? 'none' : 'block';
+        iconPause.style.display = playing ? 'block' : 'none';
+        eq.classList.toggle('playing', playing);
+        status.textContent = playing ? 'Sedang Diputar • 116 BPM' : 'Musik Dijeda';
+    }
+
+    playStep() {
+        if (!this.ctx || !this.isPlaying) return;
+        const now = this.ctx.currentTime;
+        const barIndex = Math.floor(this.step / 8) % this.chords.length;
+        const subStep = this.step % 8;
+
+        // 1. Kick drum lembut di ketukan 0, 2, 4, 6 (Four-on-the-floor runway beat)
+        if (subStep % 2 === 0) {
+            this.triggerKick(now);
+        }
+
+        // 2. Crisp Hi-Hat di ketukan off-beat (1, 3, 5, 7)
+        if (subStep % 2 === 1) {
+            this.triggerHiHat(now);
+        }
+
+        // 3. Synth Electric Piano Chords di ketukan 0 dan 3 (Syncopated British Pop groove)
+        if (subStep === 0 || subStep === 3) {
+            this.triggerChord(this.chords[barIndex], now, subStep === 0 ? 0.55 : 0.35);
+        }
+
+        // 4. Groovy Synth Bass
+        if (subStep === 0 || subStep === 4 || subStep === 6) {
+            const octave = subStep === 6 ? 2 : 1;
+            this.triggerBass(this.bassNotes[barIndex] * octave, now);
+        }
+
+        this.step++;
+    }
+
+    triggerKick(time) {
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(115, time);
+        osc.frequency.exponentialRampToValueAtTime(42, time + 0.14);
+
+        gain.gain.setValueAtTime(0.16, time);
+        gain.gain.exponentialRampToValueAtTime(0.001, time + 0.15);
+
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+        osc.start(time);
+        osc.stop(time + 0.16);
+    }
+
+    triggerHiHat(time) {
+        const bufferSize = this.ctx.sampleRate * 0.04;
+        const buffer = this.ctx.createBuffer(1, bufferSize, this.ctx.sampleRate);
+        const data = buffer.getChannelData(0);
+        for (let i = 0; i < bufferSize; i++) data[i] = Math.random() * 2 - 1;
+
+        const noise = this.ctx.createBufferSource();
+        noise.buffer = buffer;
+
+        const filter = this.ctx.createBiquadFilter();
+        filter.type = 'highpass';
+        filter.frequency.value = 7500;
+
+        const gain = this.ctx.createGain();
+        gain.gain.setValueAtTime(0.045, time);
+        gain.gain.exponentialRampToValueAtTime(0.001, time + 0.04);
+
+        noise.connect(filter);
+        filter.connect(gain);
+        gain.connect(this.ctx.destination);
+        noise.start(time);
+    }
+
+    triggerChord(freqs, time, dur) {
+        freqs.forEach(f => {
+            const osc = this.ctx.createOscillator();
+            const gain = this.ctx.createGain();
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(f, time);
+
+            gain.gain.setValueAtTime(0.025, time);
+            gain.gain.exponentialRampToValueAtTime(0.0008, time + dur);
+
+            osc.connect(gain);
+            gain.connect(this.ctx.destination);
+            osc.start(time);
+            osc.stop(time + dur + 0.02);
+        });
+    }
+
+    triggerBass(freq, time) {
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, time);
+
+        gain.gain.setValueAtTime(0.11, time);
+        gain.gain.exponentialRampToValueAtTime(0.001, time + 0.22);
+
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+        osc.start(time);
+        osc.stop(time + 0.24);
+    }
+
+    // Efek suara kilau ajaib saat memakai skincare/makeup
+    playSparkleSfx() {
+        this.init();
+        if (!this.ctx) return;
+        if (this.ctx.state === 'suspended') this.ctx.resume();
+        const now = this.ctx.currentTime;
+        [587.33, 880, 1174.66].forEach((freq, idx) => {
+            const osc = this.ctx.createOscillator();
+            const gain = this.ctx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(freq, now + idx * 0.045);
+            gain.gain.setValueAtTime(0.05, now + idx * 0.045);
+            gain.gain.exponentialRampToValueAtTime(0.0008, now + idx * 0.045 + 0.22);
+            osc.connect(gain);
+            gain.connect(this.ctx.destination);
+            osc.start(now + idx * 0.045);
+            osc.stop(now + idx * 0.045 + 0.24);
+        });
+    }
+}
+
+const synth = new LondonRunwaySynth();
+
+/**
+ * ============================================================================
+ * 2. DATA & STATE GAME MAKEOVER RATU ELEANOR
+ * ============================================================================
+ */
+const gameState = {
+    currentStep: 0, // 0: Skincare, 1: Makeup, 2: Hair & Crown, 3: Fashion, 4: Royal Escort, 5: Finale
+    
+    // Progres Tahap 1: Skincare
+    activeSkincareTool: 'cleanser',
+    skincare: {
+        cleanserDone: false,
+        blemishesHealed: 0, // target 5
+        maskDone: false,
+        eyeCreamDone: false
+    },
+
+    // Pilihan Tahap 2: Makeup
+    makeup: {
+        eyeshadow: { name: 'Champagne Gold', color: '#D4AF7A', opacity: 0 },
+        blush: { name: 'Rosy Glow', color: '#E68A99', opacity: 0 },
+        lipstick: { name: 'Velvet Crimson', upper: '#A8324A', lower: '#C4415B' },
+        lashes: false
+    },
+
+    // Pilihan Tahap 3: Rambut & Mahkota
+    hair: {
+        style: 'waves', // waves, chignon, curls, bob
+        color: 'chestnut', // chestnut, blonde, raven, auburn
+        tiara: 'none', // none, diamond, pearl
+        jewelry: 'none' // none, emerald, choker
+    },
+
+    // Pilihan Tahap 4: Busana Gala
+    fashion: {
+        gown: 'robe', // robe, champagne, emerald, suit, midnight
+        gloves: false,
+        clutch: false
+    },
+
+    // Pilihan Tahap 5: Pasangan Kerajaan (Royal Escort)
+    escort: 'alistair' // alistair, julian, sebastian, edward
+};
+
+// Katalog 4 Pasangan Kerajaan Modern (Royal Escorts)
+const ROYAL_ESCORTS = {
+    alistair: {
+        id: 'alistair',
+        name: 'Duke Alistair of Kensington',
+        title: 'Bangsawan Klasik • Karismatik',
+        badgeColor: '#1E2436',
+        icon: '🎩',
+        desc: 'Tuksedo hitam klasik dengan dasi kupu-kupu sutra, pembawaan tenang dan penuh kharisma.',
+        quote: '"Yang Mulia Ratu Eleanor, malam ini seluruh London akan terpukau melihat keanggunan Anda. Izinkan saya mendampingi."',
+        galaTitle: 'Pasangan Ikonik Kensington',
+        bonusElegance: 6
+    },
+    julian: {
+        id: 'julian',
+        name: 'Prince Julian of Windsor',
+        title: 'Pangeran Muda • Hangat & Modern',
+        badgeColor: '#25416B',
+        icon: '🎖️',
+        desc: 'Setelan jas biru navy kerajaan beraksen medali emas dengan rambut pirang keemasan dan senyum ramah.',
+        quote: '"Kau tampak luar biasa bercahaya, Eleanor! Mari kita melangkah bersama menuju karpet merah Grand Banquet."',
+        galaTitle: 'Duo Pewaris Mahkota Modern',
+        bonusElegance: 7
+    },
+    sebastian: {
+        id: 'sebastian',
+        name: 'Lord Sebastian Sterling',
+        title: 'Diplomat Aristokrat • Misterius',
+        badgeColor: '#692035',
+        icon: '🍷',
+        desc: 'Setelan jas burgundy gelap berpotongan tajam dengan kacamata tipis elegan dan tatapan memikat.',
+        quote: '"Sebuah kehormatan diplomatik tertinggi bagi saya untuk berjalan di sisi Ratu paling menawan malam ini."',
+        galaTitle: 'Pesona Aristokrat & Diplomasi',
+        bonusElegance: 6
+    },
+    edward: {
+        id: 'edward',
+        name: 'Sir Edward Vance',
+        title: 'Kapten Pengawal Kerajaan • Gagah',
+        badgeColor: '#9E7634',
+        icon: '⚔️',
+        desc: 'Seragam upacara putih-emas modern berpostur tegap, setia menjaga dan mendampingi sang Ratu.',
+        quote: '"Keselamatan dan kehormatan Yang Mulia adalah prioritas utama saya. Pintu Ballroom telah menanti kita."',
+        galaTitle: 'Ksatria Pelindung & Sang Ratu',
+        bonusElegance: 7
+    }
+};
+
+// Katalog Warna & Gaya
+const MAKEUP_CATALOG = {
+    eyeshadow: [
+        { name: 'Champagne Gold', color: '#D4AF7A' },
+        { name: 'Rose Quartz', color: '#D98A9C' },
+        { name: 'Royal Plum', color: '#7D4E7A' },
+        { name: 'Smoky Bronze', color: '#785A46' }
+    ],
+    blush: [
+        { name: 'Soft Peach', color: '#E89B82' },
+        { name: 'Rosy Glow', color: '#E37B90' },
+        { name: 'Golden Shimmer', color: '#DDA86B' }
+    ],
+    lipstick: [
+        { name: 'Natural Rose', upper: '#C97C7C', lower: '#D68A8A' },
+        { name: 'Velvet Crimson', upper: '#9E263E', lower: '#BA344F' },
+        { name: 'Berry Royal', upper: '#7A244D', lower: '#943361' },
+        { name: 'Coral Silk', upper: '#D15B52', lower: '#E36F66' }
+    ]
+};
+
+const HAIR_COLORS = {
+    chestnut: { name: 'Chestnut Brown', stops: ['#6B442E', '#472919', '#2B170D'] },
+    blonde:   { name: 'Platinum Blonde', stops: ['#F7E9C8', '#DEC48E', '#B89A63'] },
+    raven:    { name: 'Raven Black', stops: ['#383B47', '#1E2029', '#101117'] },
+    auburn:   { name: 'Royal Auburn', stops: ['#9C4532', '#6E2A1C', '#42160D'] }
+};
+
+/**
+ * ============================================================================
+ * 3. FUNGSI RENDER VISUAL KARAKTER RATU (SVG LAYERS)
+ * ============================================================================
+ */
+function updateQueenVisuals() {
+    // 1. Update Kulit (Skincare Progress)
+    const sc = gameState.skincare;
+    const dullnessEl = document.getElementById('skin-dullness');
+    const darkCirclesEl = document.getElementById('dark-circles');
+    const glowEl = document.getElementById('healthy-glow');
+    const s1 = document.getElementById('skin-stop-1');
+    const s2 = document.getElementById('skin-stop-2');
+
+    dullnessEl.setAttribute('opacity', sc.cleanserDone ? '0' : '0.24');
+    darkCirclesEl.setAttribute('opacity', sc.eyeCreamDone ? '0' : '0.55');
+    glowEl.setAttribute('opacity', sc.maskDone ? '1' : '0');
+
+    // Cerahkan rona kulit jika masker sudah dipakai
+    if (sc.maskDone) {
+        s1.setAttribute('stop-color', '#F7D9C8');
+        s2.setAttribute('stop-color', '#EBC1AC');
+    } else if (sc.cleanserDone) {
+        s1.setAttribute('stop-color', '#F0CBB8');
+        s2.setAttribute('stop-color', '#E0B49F');
+    }
+
+    // 2. Update Makeup
+    const mk = gameState.makeup;
+    const esL = document.getElementById('makeup-eyeshadow-l');
+    const esR = document.getElementById('makeup-eyeshadow-r');
+    esL.setAttribute('fill', mk.eyeshadow.color);
+    esR.setAttribute('fill', mk.eyeshadow.color);
+    esL.setAttribute('opacity', mk.eyeshadow.opacity);
+    esR.setAttribute('opacity', mk.eyeshadow.opacity);
+
+    const blL = document.getElementById('makeup-blush-l');
+    const blR = document.getElementById('makeup-blush-r');
+    blL.setAttribute('fill', mk.blush.color);
+    blR.setAttribute('fill', mk.blush.color);
+    blL.setAttribute('opacity', mk.blush.opacity);
+    blR.setAttribute('opacity', mk.blush.opacity);
+
+    document.getElementById('lip-upper').setAttribute('fill', mk.lipstick.upper);
+    document.getElementById('lip-lower').setAttribute('fill', mk.lipstick.lower);
+    document.getElementById('lashes-l').setAttribute('opacity', mk.lashes ? '1' : '0');
+    document.getElementById('lashes-r').setAttribute('opacity', mk.lashes ? '1' : '0');
+
+    // 3. Update Warna & Gaya Rambut
+    const hc = HAIR_COLORS[gameState.hair.color];
+    document.getElementById('hair-stop-1').setAttribute('stop-color', hc.stops[0]);
+    document.getElementById('hair-stop-2').setAttribute('stop-color', hc.stops[1]);
+    document.getElementById('hair-stop-3').setAttribute('stop-color', hc.stops[2]);
+
+    const hairBack = document.getElementById('hair-back-layer');
+    const hairFront = document.getElementById('hair-front-layer');
+
+    if (gameState.hair.style === 'waves') {
+        hairBack.innerHTML = `<path d="M115 160 C95 230, 90 340, 118 420 C145 435, 255 435, 282 420 C310 340, 305 230, 285 160 Z" fill="url(#hair-grad)"/>`;
+        hairFront.innerHTML = `<path d="M126 162 C126 105, 274 105, 274 162 C264 128, 228 122, 200 134 C172 122, 136 128, 126 162 Z" fill="url(#hair-grad)"/>`;
+    } else if (gameState.hair.style === 'chignon') {
+        hairBack.innerHTML = `
+            <circle cx="200" cy="96" r="42" fill="url(#hair-grad)"/>
+            <path d="M124 165 C122 115, 278 115, 276 165 Z" fill="url(#hair-grad)"/>`;
+        hairFront.innerHTML = `<path d="M126 164 C132 112, 268 112, 274 164 C252 135, 220 128, 200 130 C180 128, 148 135, 126 164 Z" fill="url(#hair-grad)"/>`;
+    } else if (gameState.hair.style === 'curls') {
+        hairBack.innerHTML = `
+            <circle cx="200" cy="112" r="34" fill="url(#hair-grad)"/>
+            <path d="M112 170 C88 245, 96 345, 128 400 C160 412, 240 412, 272 400 C304 345, 312 245, 288 170 Z" fill="url(#hair-grad)"/>`;
+        hairFront.innerHTML = `<path d="M126 162 C126 108, 274 108, 274 162 C258 134, 222 130, 200 142 C178 130, 142 134, 126 162 Z" fill="url(#hair-grad)"/>`;
+    } else if (gameState.hair.style === 'bob') {
+        hairBack.innerHTML = `<path d="M116 155 C106 215, 114 265, 136 278 L264 278 C286 265, 294 215, 284 155 Z" fill="url(#hair-grad)"/>`;
+        hairFront.innerHTML = `<path d="M124 166 C124 104, 276 104, 276 166 C262 126, 218 124, 195 140 C170 124, 138 128, 124 166 Z" fill="url(#hair-grad)"/>`;
+    }
+
+    // 4. Update Tiara & Perhiasan
+    const tiaraLayer = document.getElementById('tiara-layer');
+    if (gameState.hair.tiara === 'diamond') {
+        tiaraLayer.innerHTML = `
+            <path d="M148 122 L162 98 L180 112 L200 84 L220 112 L238 98 L252 122 Q200 114 148 122 Z" fill="#E6F2FF" stroke="#9BB8D9" stroke-width="1.8"/>
+            <polygon points="200,88 205,98 200,108 195,98" fill="#FFFFFF"/>
+            <circle cx="162" cy="103" r="3" fill="#FFFFFF"/>
+            <circle cx="238" cy="103" r="3" fill="#FFFFFF"/>`;
+    } else if (gameState.hair.tiara === 'pearl') {
+        tiaraLayer.innerHTML = `
+            <path d="M146 122 Q200 88 254 122" fill="none" stroke="url(#gold-metal)" stroke-width="5" stroke-linecap="round"/>
+            <circle cx="200" cy="96" r="5.5" fill="#FFFDF9" stroke="#C99E57" stroke-width="1"/>
+            <circle cx="176" cy="102" r="4.5" fill="#FFFDF9" stroke="#C99E57" stroke-width="1"/>
+            <circle cx="224" cy="102" r="4.5" fill="#FFFDF9" stroke="#C99E57" stroke-width="1"/>
+            <circle cx="156" cy="112" r="3.5" fill="#FFFDF9" stroke="#C99E57" stroke-width="1"/>
+            <circle cx="244" cy="112" r="3.5" fill="#FFFDF9" stroke="#C99E57" stroke-width="1"/>`;
+    } else {
+        tiaraLayer.innerHTML = '';
+    }
+
+    const jewelryLayer = document.getElementById('jewelry-layer');
+    if (gameState.hair.jewelry === 'emerald') {
+        jewelryLayer.innerHTML = `
+            <circle cx="123" cy="204" r="4" fill="url(#gold-metal)"/>
+            <polygon points="123,209 128,220 123,231 118,220" fill="#1F7A5C" stroke="#DFC08A" stroke-width="1.2"/>
+            <circle cx="277" cy="204" r="4" fill="url(#gold-metal)"/>
+            <polygon points="277,209 282,220 277,231 272,220" fill="#1F7A5C" stroke="#DFC08A" stroke-width="1.2"/>`;
+    } else if (gameState.hair.jewelry === 'choker') {
+        jewelryLayer.innerHTML = `
+            <path d="M170 296 Q200 310 230 296" fill="none" stroke="#E8F4FF" stroke-width="4" stroke-linecap="round"/>
+            <polygon points="200,304 205,313 200,322 195,313" fill="#FFFFFF" stroke="#9BB8D9" stroke-width="1"/>`;
+    } else {
+        jewelryLayer.innerHTML = '';
+    }
+
+    // 5. Update Busana & Aksesori Gala
+    const outfitLayer = document.getElementById('outfit-layer');
+    const g = gameState.fashion.gown;
+    if (g === 'robe') {
+        outfitLayer.innerHTML = `
+            <path d="M84 360 C115 345, 155 348, 200 375 C245 348, 285 345, 316 360 L334 480 L66 480 Z" fill="#EBDAD5" stroke="#D1B7B0" stroke-width="1.5"/>
+            <path d="M148 352 L200 415 L252 352" fill="none" stroke="#C99E57" stroke-width="2"/>`;
+    } else if (g === 'champagne') {
+        outfitLayer.innerHTML = `
+            <path d="M74 366 Q200 398 326 366 L342 480 L58 480 Z" fill="#F2DEC4" stroke="#C99E57" stroke-width="1.5"/>
+            <path d="M74 366 Q200 390 326 366 L320 388 Q200 412 80 388 Z" fill="#FFF7EB" stroke="#DFC08A" stroke-width="1.2"/>
+            <path d="M140 395 L155 480 M260 395 L245 480" stroke="#D9B989" stroke-width="1.2" opacity="0.6"/>`;
+    } else if (g === 'emerald') {
+        outfitLayer.innerHTML = `
+            <path d="M72 352 L135 338 L200 382 L265 338 L328 352 L345 480 L55 480 Z" fill="#175943" stroke="#DFC08A" stroke-width="1.8"/>
+            <path d="M135 338 L200 382 L265 338" fill="none" stroke="url(#gold-metal)" stroke-width="3"/>
+            <circle cx="145" cy="355" r="4" fill="#DFC08A"/>
+            <circle cx="255" cy="355" r="4" fill="#DFC08A"/>`;
+    } else if (g === 'suit') {
+        outfitLayer.innerHTML = `
+            <path d="M80 350 L152 332 L200 402 L248 332 L320 350 L336 480 L64 480 Z" fill="#FFFFFF" stroke="#D8D2CC" stroke-width="1.5"/>
+            <polygon points="152,332 178,342 200,402 162,386" fill="#F4EFEA" stroke="#C99E57" stroke-width="1.2"/>
+            <polygon points="248,332 222,342 200,402 238,386" fill="#F4EFEA" stroke="#C99E57" stroke-width="1.2"/>
+            <circle cx="200" cy="422" r="4.5" fill="url(#gold-metal)"/>
+            <circle cx="200" cy="446" r="4.5" fill="url(#gold-metal)"/>`;
+    } else if (g === 'midnight') {
+        outfitLayer.innerHTML = `
+            <path d="M85 362 Q200 342 315 362 L338 480 L62 480 Z" fill="#1C2541" stroke="#DFC08A" stroke-width="1.5"/>
+            <circle cx="140" cy="410" r="2" fill="#FFF2CC"/><circle cx="185" cy="435" r="2.5" fill="#FFF2CC"/>
+            <circle cx="230" cy="405" r="2" fill="#FFF2CC"/><circle cx="265" cy="445" r="2.2" fill="#FFF2CC"/>
+            <circle cx="165" cy="455" r="1.8" fill="#FFF2CC"/><circle cx="215" cy="462" r="2" fill="#FFF2CC"/>`;
+    }
+
+    const accLayer = document.getElementById('fashion-acc-layer');
+    let accHtml = '';
+    if (gameState.fashion.gloves) {
+        accHtml += `
+            <path d="M72 395 L58 480 L94 480 L102 405 Z" fill="#FFFDF9" stroke="#DFC08A" stroke-width="1.2"/>
+            <path d="M328 395 L342 480 L306 480 L298 405 Z" fill="#FFFDF9" stroke="#DFC08A" stroke-width="1.2"/>`;
+    }
+    if (gameState.fashion.clutch) {
+        accHtml += `
+            <rect x="242" y="422" width="68" height="40" rx="8" fill="url(#gold-metal)" stroke="#8F6722" stroke-width="1.5"/>
+            <circle cx="276" cy="422" r="5" fill="#FFFDF9" stroke="#8F6722" stroke-width="1.2"/>`;
+    }
+    accLayer.innerHTML = accHtml;
+
+    // 6. Update Visual Pasangan Kerajaan (Royal Escort)
+    renderEscortCharacter();
+}
+
+function renderEscortCharacter() {
+    const escortRoot = document.getElementById('escort-character-root');
+    const id = gameState.escort;
+
+    // Konfigurasi tampilan tiap karakter bangsawan pria
+    const configs = {
+        alistair: {
+            hairMain: '#3D2618', hairLight: '#593A27', eyeColor: '#3B5266',
+            suitFill: '#1B1E26', suitStroke: '#383E4D', lapelFill: '#111318',
+            shirtFill: '#FFFFFF', tieType: 'bowtie', tieColor: '#111318',
+            glasses: false, medals: false, pocketSquare: '#F5E6CC'
+        },
+        julian: {
+            hairMain: '#D6B168', hairLight: '#EDD091', eyeColor: '#3E6B89',
+            suitFill: '#1F3559', suitStroke: '#C99E57', lapelFill: '#162742',
+            shirtFill: '#FFFFFF', tieType: 'necktie', tieColor: '#9E2A3B',
+            glasses: false, medals: true, pocketSquare: '#DFC08A'
+        },
+        sebastian: {
+            hairMain: '#1E2029', hairLight: '#373B4A', eyeColor: '#4B5563',
+            suitFill: '#5E1D30', suitStroke: '#8F354F', lapelFill: '#421220',
+            shirtFill: '#FAF6F2', tieType: 'cravat', tieColor: '#2B141C',
+            glasses: true, medals: false, pocketSquare: '#E7CE9B'
+        },
+        edward: {
+            hairMain: '#5C3A24', hairLight: '#7D5236', eyeColor: '#2F5D50',
+            suitFill: '#F7F4EE', suitStroke: '#C99E57', lapelFill: '#EFE9DD',
+            shirtFill: '#FFFFFF', tieType: 'collar', tieColor: '#C99E57',
+            glasses: false, medals: true, pocketSquare: '#9E2A3B'
+        }
+    };
+
+    const c = configs[id] || configs.alistair;
+
+    // Detail dasi/kerah
+    let neckwearSvg = '';
+    if (c.tieType === 'bowtie') {
+        neckwearSvg = `
+            <polygon points="184,335 200,342 184,349" fill="${c.tieColor}"/>
+            <polygon points="216,335 200,342 216,349" fill="${c.tieColor}"/>
+            <rect x="197" y="338" width="6" height="8" rx="2" fill="${c.tieColor}"/>`;
+    } else if (c.tieType === 'necktie') {
+        neckwearSvg = `
+            <polygon points="195,336 205,336 203,345 197,345" fill="${c.tieColor}"/>
+            <polygon points="197,345 203,345 207,418 200,428 193,418" fill="${c.tieColor}"/>`;
+    } else if (c.tieType === 'cravat') {
+        neckwearSvg = `
+            <path d="M186 334 Q200 348 214 334 L210 385 L190 385 Z" fill="${c.tieColor}"/>
+            <circle cx="200" cy="348" r="3.5" fill="url(#gold-metal)"/>`;
+    } else {
+        // Seragam upacara kerah tinggi emas
+        neckwearSvg = `
+            <rect x="176" y="316" width="48" height="16" rx="4" fill="url(#gold-metal)"/>
+            <line x1="200" y1="316" x2="200" y2="332" stroke="#8F6722" stroke-width="1.5"/>`;
+    }
+
+    // Detail kacamata untuk Lord Sebastian
+    const glassesSvg = c.glasses ? `
+        <g stroke="#C99E57" stroke-width="1.6" fill="rgba(255,255,255,0.12)">
+            <rect x="150" y="164" width="34" height="19" rx="5"/>
+            <rect x="216" y="164" width="34" height="19" rx="5"/>
+            <line x1="184" y1="172" x2="216" y2="172"/>
+        </g>` : '';
+
+    // Detail medali & selempang emas untuk Prince Julian & Sir Edward
+    const medalsSvg = c.medals ? `
+        <g>
+            <path d="M138 334 L245 468" stroke="#2D5A88" stroke-width="14" opacity="0.88"/>
+            <path d="M138 334 L245 468" stroke="url(#gold-metal)" stroke-width="2.5" stroke-dasharray="6 4"/>
+            <circle cx="236" cy="384" r="7" fill="url(#gold-metal)" stroke="#8F6722" stroke-width="1"/>
+            <circle cx="254" cy="384" r="7" fill="url(#gold-metal)" stroke="#8F6722" stroke-width="1"/>
+            <rect x="115" y="336" width="34" height="10" rx="5" fill="url(#gold-metal)"/>
+            <rect x="251" y="336" width="34" height="10" rx="5" fill="url(#gold-metal)"/>
+        </g>` : `
+        <polygon points="236,386 254,386 250,376 240,376" fill="${c.pocketSquare}"/>`;
+
+    escortRoot.innerHTML = `
+        <!-- Rambut Belakang Pria -->
+        <path d="M126 155 C120 100, 280 100, 274 155 L268 195 L132 195 Z" fill="${c.hairMain}"/>
+
+        <!-- Leher & Bahu Bidang -->
+        <path d="M174 244 L174 316 L102 338 C82 346, 70 368, 64 468 L336 468 C330 368, 318 346, 298 338 L226 316 L226 244 Z" fill="url(#escort-skin-grad)"/>
+        <path d="M174 252 Q200 272 226 252 L226 270 Q200 284 174 270 Z" fill="#AE7B63" opacity="0.32"/>
+
+        <!-- Kemeja Dalam -->
+        <polygon points="174,316 200,432 226,316" fill="${c.shirtFill}"/>
+        ${neckwearSvg}
+
+        <!-- Jas / Seragam Bangsawan -->
+        <path d="M102 338 L174 316 L200 432 L226 316 L298 338 C320 348, 332 372, 338 468 L62 468 C68 372, 80 348, 102 338 Z" fill="${c.suitFill}" stroke="${c.suitStroke}" stroke-width="1.6"/>
+        <!-- Kerah Jas (Lapels) -->
+        <polygon points="174,316 152,356 176,374 166,388 200,432" fill="${c.lapelFill}" stroke="${c.suitStroke}" stroke-width="1.2"/>
+        <polygon points="226,316 248,356 224,374 234,388 200,432" fill="${c.lapelFill}" stroke="${c.suitStroke}" stroke-width="1.2"/>
+        <!-- Kancing Emas Jas -->
+        <circle cx="200" cy="442" r="4" fill="url(#gold-metal)"/>
+        ${medalsSvg}
+
+        <!-- Telinga & Kontur Wajah Rahang Tegas -->
+        <ellipse cx="128" cy="182" rx="10" ry="17" fill="url(#escort-skin-grad)"/>
+        <ellipse cx="272" cy="182" rx="10" ry="17" fill="url(#escort-skin-grad)"/>
+        <path d="M132 148 C132 98, 268 98, 268 148 C268 204, 246 244, 200 254 C154 244, 132 204, 132 148 Z" fill="url(#escort-skin-grad)"/>
+
+        <!-- Alis & Mata Berwibawa -->
+        <path d="M148 158 Q166 152 183 158" fill="none" stroke="${c.hairMain}" stroke-width="3.6" stroke-linecap="round"/>
+        <path d="M217 158 Q234 152 252 158" fill="none" stroke="${c.hairMain}" stroke-width="3.6" stroke-linecap="round"/>
+
+        <ellipse cx="166" cy="173" rx="12" ry="7" fill="#FFFFFF"/>
+        <circle cx="166" cy="173" r="5.2" fill="${c.eyeColor}"/>
+        <circle cx="166" cy="173" r="2.5" fill="#14181F"/>
+        <circle cx="168" cy="171.5" r="1.5" fill="#FFFFFF"/>
+        <path d="M153 172 Q166 164 179 172" fill="none" stroke="#1E1815" stroke-width="2.2" stroke-linecap="round"/>
+
+        <ellipse cx="234" cy="173" rx="12" ry="7" fill="#FFFFFF"/>
+        <circle cx="234" cy="173" r="5.2" fill="${c.eyeColor}"/>
+        <circle cx="234" cy="173" r="2.5" fill="#14181F"/>
+        <circle cx="236" cy="171.5" r="1.5" fill="#FFFFFF"/>
+        <path d="M221 172 Q234 164 247 172" fill="none" stroke="#1E1815" stroke-width="2.2" stroke-linecap="round"/>
+
+        ${glassesSvg}
+
+        <!-- Hidung & Senyum Hangat -->
+        <path d="M200 172 L197 198 Q200 202 205 198" fill="none" stroke="#B07D66" stroke-width="2" stroke-linecap="round"/>
+        <path d="M180 220 Q200 232 220 220" fill="none" stroke="#9E5B52" stroke-width="2.6" stroke-linecap="round"/>
+        <path d="M192 229 Q200 232 208 229" fill="none" stroke="#B8826B" stroke-width="1.3" stroke-linecap="round" opacity="0.6"/>
+
+        <!-- Tata Rambut Modern Pria -->
+        <path d="M128 156 C125 95, 275 95, 272 156 C264 126, 232 118, 198 122 C168 125, 140 130, 128 156 Z" fill="${c.hairMain}"/>
+        <path d="M148 112 Q195 92 246 114 Q212 104 148 112 Z" fill="${c.hairLight}" opacity="0.65"/>
+    `;
+}
+
+/**
+ * ============================================================================
+ * 4. INTERAKSI SKINCARE PADA WAJAH RATU (KLIK / USAP)
+ * ============================================================================
+ */
+function getSkincarePercent() {
+    const sc = gameState.skincare;
+    let pts = 0;
+    if (sc.cleanserDone) pts += 25;
+    pts += (sc.blemishesHealed / 5) * 35;
+    if (sc.maskDone) pts += 25;
+    if (sc.eyeCreamDone) pts += 15;
+    return Math.round(pts);
+}
+
+function spawnSparkles(x, y, color = '#DFC08A', count = 7) {
+    const fxLayer = document.getElementById('fx-layer');
+    for (let i = 0; i < count; i++) {
+        const p = document.createElement('div');
+        p.className = 'particle';
+        const size = 6 + Math.random() * 8;
+        const offsetX = (Math.random() - 0.5) * 65;
+        const offsetY = (Math.random() - 0.5) * 55;
+        p.style.width = `${size}px`;
+        p.style.height = `${size}px`;
+        p.style.left = `${x + offsetX}px`;
+        p.style.top = `${y + offsetY}px`;
+        p.style.background = color;
+        p.style.boxShadow = `0 0 8px ${color}`;
+        fxLayer.appendChild(p);
+        setTimeout(() => p.remove(), 900);
+    }
+}
+
+function applySkincareAt(clientX, clientY) {
+    if (gameState.currentStep !== 0) return;
+
+    const zone = document.getElementById('queen-interact-zone');
+    const rect = zone.getBoundingClientRect();
+    const relX = clientX - rect.left;
+    const relY = clientY - rect.top;
+
+    const tool = gameState.activeSkincareTool;
+    const sc = gameState.skincare;
+
+    if (tool === 'cleanser') {
+        spawnSparkles(relX, relY, '#BCE6FF', 8);
+        if (!sc.cleanserDone) {
+            sc.cleanserDone = true;
+            synth.playSparkleSfx();
+            setDialogue('✨ Madame Claire', '"Wajah Ratu sudah bersih dan segar! Sekarang pilih Serum Jerawat untuk menghilangkan bintik merahnya."');
+            updateQueenVisuals();
+            renderStudioPanel();
+        }
+    } else if (tool === 'serum') {
+        spawnSparkles(relX, relY, '#9CE8C4', 6);
+        const remainingBlemishes = document.querySelectorAll('.blemish:not(.healed)');
+        if (remainingBlemishes.length > 0) {
+            const target = remainingBlemishes[0];
+            target.classList.add('healed');
+            target.style.transition = 'opacity 0.35s ease, transform 0.35s ease';
+            target.style.opacity = '0';
+            target.style.transform += ' scale(0.1)';
+            sc.blemishesHealed++;
+            synth.playSparkleSfx();
+
+            if (sc.blemishesHealed >= 5) {
+                setDialogue('👑 Ratu Eleanor', '"Wah, bintik breakout-ku benar-benar hilang! Wajahku terasa jauh lebih ringan."');
+            } else {
+                setDialogue('✨ Madame Claire', `"Bagus! Tersisa ${5 - sc.blemishesHealed} titik breakout lagi. Terus oleskan serum di wajah Ratu!"`);
+            }
+            renderStudioPanel();
+        }
+    } else if (tool === 'mask') {
+        spawnSparkles(relX, relY, '#F5D384', 10);
+        if (!sc.maskDone) {
+            sc.maskDone = true;
+            synth.playSparkleSfx();
+            const maskEl = document.getElementById('gold-mask-overlay');
+            maskEl.style.transition = 'opacity 0.4s ease';
+            maskEl.setAttribute('opacity', '0.68');
+            setDialogue('✨ Madame Claire', '"Masker Emas Kerajaan meresap sempurna! Lihat betapa glowing dan cerah kulit Ratu sekarang."');
+            setTimeout(() => {
+                maskEl.setAttribute('opacity', '0');
+                updateQueenVisuals();
+                renderStudioPanel();
+            }, 950);
+        }
+    } else if (tool === 'eyecream') {
+        spawnSparkles(relX, relY, '#E5C6FF', 8);
+        if (!sc.eyeCreamDone) {
+            sc.eyeCreamDone = true;
+            synth.playSparkleSfx();
+            setDialogue('👑 Ratu Eleanor', '"Kantung mataku langsung segar! Aku siap untuk tahap riasan glamor."');
+            updateQueenVisuals();
+            renderStudioPanel();
+        }
+    }
+}
+
+// Event pointer untuk mengusap / mengklik wajah Ratu
+const interactZone = document.getElementById('queen-interact-zone');
+const floatingTool = document.getElementById('floating-tool');
+const toolEmojiMap = { cleanser: '🫧', serum: '💧', mask: '✨', eyecream: '👁️' };
+
+interactZone.addEventListener('mousemove', (e) => {
+    if (gameState.currentStep === 0) {
+        const stageRect = document.getElementById('palace-stage').getBoundingClientRect();
+        floatingTool.style.display = 'block';
+        floatingTool.textContent = toolEmojiMap[gameState.activeSkincareTool] || '✨';
+        floatingTool.style.left = `${e.clientX - stageRect.left}px`;
+        floatingTool.style.top = `${e.clientY - stageRect.top}px`;
+    } else {
+        floatingTool.style.display = 'none';
+    }
+});
+
+interactZone.addEventListener('mouseleave', () => {
+    floatingTool.style.display = 'none';
+});
+
+interactZone.addEventListener('click', (e) => {
+    applySkincareAt(e.clientX, e.clientY);
+});
+
+interactZone.addEventListener('touchstart', (e) => {
+    if (e.touches.length > 0) {
+        applySkincareAt(e.touches[0].clientX, e.touches[0].clientY);
+    }
+}, { passive: true });
+
+/**
+ * ============================================================================
+ * 5. RENDER PANEL STUDIO MAKEOVER UNTUK SETIAP TAHAP
+ * ============================================================================
+ */
+function setDialogue(speaker, text) {
+    document.getElementById('speaker-name').textContent = speaker;
+    document.getElementById('dialogue-text').textContent = text;
+}
+
+function goToStep(stepIdx) {
+    gameState.currentStep = stepIdx;
+    floatingTool.style.display = 'none';
+
+    // Update stepper pills
+    document.querySelectorAll('.step-pill').forEach((pill, i) => {
+        pill.classList.toggle('active', i === stepIdx);
+        pill.classList.toggle('completed', i < stepIdx);
+    });
+
+    const stage = document.getElementById('palace-stage');
+    const canvasWrap = document.getElementById('queen-interact-zone');
+    const queenRoot = document.getElementById('queen-character-root');
+    const escortRoot = document.getElementById('escort-character-root');
+    const galaBackdrop = document.getElementById('gala-backdrop-layer');
+    const locLabel = document.getElementById('location-label');
+    const stepCounter = document.getElementById('step-counter-text');
+
+    const isDuoView = (stepIdx === 4 || stepIdx === 5);
+    stage.classList.toggle('gala-mode', stepIdx === 5);
+    canvasWrap.classList.toggle('duo-mode', isDuoView);
+    galaBackdrop.setAttribute('opacity', stepIdx === 5 ? '1' : '0');
+
+    // Posisikan Ratu Eleanor & Pasangan berdampingan pada tahap 5 & 6
+    if (isDuoView) {
+        queenRoot.setAttribute('transform', 'translate(-22, 16) scale(0.95)');
+        escortRoot.setAttribute('transform', 'translate(212, 10) scale(0.96)');
+        escortRoot.setAttribute('opacity', '1');
+    } else {
+        queenRoot.setAttribute('transform', 'translate(70, 0) scale(1)');
+        escortRoot.setAttribute('transform', 'translate(250, 10) scale(0.96)');
+        escortRoot.setAttribute('opacity', '0');
+    }
+
+    if (stepIdx === 0) {
+        locLabel.textContent = 'Royal Suite • Ruang Perawatan Istana';
+        stepCounter.textContent = 'Tahap 1 / 5';
+        setDialogue('✨ Madame Claire — Royal Stylist', '"Pilih alat skincare di panel kanan, lalu klik pada wajah Ratu Eleanor untuk merawat breakout hingga kulitnya glowing!"');
+    } else if (stepIdx === 1) {
+        locLabel.textContent = 'Vanity Mirror • Meja Rias Kerajaan';
+        stepCounter.textContent = 'Tahap 2 / 5';
+        setDialogue('✨ Madame Claire — Royal Stylist', '"Kulit Ratu sudah mulus sempurna! Sekarang pilih palet eyeshadow, blush, dan lipstik yang elegan."');
+    } else if (stepIdx === 2) {
+        locLabel.textContent = 'Crown Vault • Ruang Tata Rambut & Tiara';
+        stepCounter.textContent = 'Tahap 3 / 5';
+        setDialogue('👑 Ratu Eleanor', '"Aku suka gaya rambut yang modern namun tetap berwibawa. Mahkota mana yang paling cocok untukku?"');
+    } else if (stepIdx === 3) {
+        locLabel.textContent = 'Royal Atelier • Ruang Gaun Adibusana';
+        stepCounter.textContent = 'Tahap 4 / 5';
+        setDialogue('✨ Madame Claire — Royal Stylist', '"Pilih busana gala kerajaan modern dan aksesori pelengkap sebelum memilih pasangan pendamping!"');
+    } else if (stepIdx === 4) {
+        locLabel.textContent = 'Royal Reception Hall • Ruang Tunggu Bangsawan';
+        stepCounter.textContent = 'Tahap 5 / 5';
+        const chosen = ROYAL_ESCORTS[gameState.escort];
+        setDialogue(`🎩 ${chosen.name}`, chosen.quote);
+    } else if (stepIdx === 5) {
+        locLabel.textContent = 'Grand Ballroom • Karpet Merah Perjamuan';
+        stepCounter.textContent = 'Grand Finale';
+        triggerGalaFinaleEffects();
+    }
+
+    renderStudioPanel();
+}
+
+function renderStudioPanel() {
+    const panel = document.getElementById('studio-panel');
+    const step = gameState.currentStep;
+
+    if (step === 0) {
+        const sc = gameState.skincare;
+        const pct = getSkincarePercent();
+        panel.innerHTML = `
+            <div>
+                <div class="panel-header">
+                    <h2>1. Perawatan Wajah (Skincare)</h2>
+                    <p>Pilih alat di bawah lalu klik wajah sang Ratu untuk menghilangkan breakout.</p>
+                </div>
+
+                <div class="skincare-meter">
+                    <div class="meter-top">
+                        <span>Tingkat Kesehatan & Kilau Kulit</span>
+                        <span>${pct}%</span>
+                    </div>
+                    <div class="meter-track">
+                        <div class="meter-fill" style="width:${pct}%"></div>
+                    </div>
+                </div>
+
+                <div class="control-section" style="margin-top:1.1rem;">
+                    <span class="section-label">Pilih Alat Perawatan:</span>
+                    <div class="tool-grid">
+                        <button class="tool-card ${gameState.activeSkincareTool === 'cleanser' ? 'active' : ''} ${sc.cleanserDone ? 'done' : ''}" onclick="selectSkincareTool('cleanser')">
+                            <div class="tool-icon">🫧</div>
+                            <div class="tool-meta">
+                                <strong>Facial Foam</strong>
+                                <span>Bersihkan minyak kusam</span>
+                            </div>
+                        </button>
+                        <button class="tool-card ${gameState.activeSkincareTool === 'serum' ? 'active' : ''} ${sc.blemishesHealed >= 5 ? 'done' : ''}" onclick="selectSkincareTool('serum')">
+                            <div class="tool-icon">💧</div>
+                            <div class="tool-meta">
+                                <strong>Acne Serum (${sc.blemishesHealed}/5)</strong>
+                                <span>Sembuhkan breakout</span>
+                            </div>
+                        </button>
+                        <button class="tool-card ${gameState.activeSkincareTool === 'mask' ? 'active' : ''} ${sc.maskDone ? 'done' : ''}" onclick="selectSkincareTool('mask')">
+                            <div class="tool-icon">✨</div>
+                            <div class="tool-meta">
+                                <strong>Royal Gold Gel</strong>
+                                <span>Beri efek kulit glowing</span>
+                            </div>
+                        </button>
+                        <button class="tool-card ${gameState.activeSkincareTool === 'eyecream' ? 'active' : ''} ${sc.eyeCreamDone ? 'done' : ''}" onclick="selectSkincareTool('eyecream')">
+                            <div class="tool-icon">👁️</div>
+                            <div class="tool-meta">
+                                <strong>Peptide Eye Cream</strong>
+                                <span>Hapus lingkar hitam</span>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel-footer">
+                <button class="btn-royal btn-prev" onclick="quickAutoSkincare()">Selesaikan Cepat ✨</button>
+                <button class="btn-royal btn-next" onclick="goToStep(1)">Lanjut ke Riasan →</button>
+            </div>
+        `;
+    } else if (step === 1) {
+        const mk = gameState.makeup;
+        panel.innerHTML = `
+            <div>
+                <div class="panel-header">
+                    <h2>2. Riasan Glamor Kerajaan</h2>
+                    <p>Padukan warna riasan elegan yang menonjolkan pesona Ratu Eleanor.</p>
+                </div>
+
+                <div class="control-section" style="margin-top:1rem;">
+                    <span class="section-label">Eyeshadow Palette:</span>
+                    <div class="swatch-row">
+                        ${MAKEUP_CATALOG.eyeshadow.map(item => `
+                            <button class="swatch-btn ${mk.eyeshadow.name === item.name && mk.eyeshadow.opacity > 0 ? 'active' : ''}" onclick="setEyeshadow('${item.name}', '${item.color}')">
+                                <span class="color-dot" style="background:${item.color}"></span>${item.name}
+                            </button>
+                        `).join('')}
+                    </div>
+                </div>
+
+                <div class="control-section">
+                    <span class="section-label">Blush & Highlighter:</span>
+                    <div class="swatch-row">
+                        ${MAKEUP_CATALOG.blush.map(item => `
+                            <button class="swatch-btn ${mk.blush.name === item.name && mk.blush.opacity > 0 ? 'active' : ''}" onclick="setBlush('${item.name}', '${item.color}')">
+                                <span class="color-dot" style="background:${item.color}"></span>${item.name}
+                            </button>
+                        `).join('')}
+                    </div>
+                </div>
+
+                <div class="control-section">
+                    <span class="section-label">Royal Velvet Lipstick:</span>
+                    <div class="swatch-row">
+                        ${MAKEUP_CATALOG.lipstick.map(item => `
+                            <button class="swatch-btn ${mk.lipstick.upper === item.upper ? 'active' : ''}" onclick="setLipstick('${item.name}', '${item.upper}', '${item.lower}')">
+                                <span class="color-dot" style="background:${item.lower}"></span>${item.name}
+                            </button>
+                        `).join('')}
+                    </div>
+                </div>
+
+                <div class="control-section">
+                    <span class="section-label">Detail Mata:</span>
+                    <button class="swatch-btn ${mk.lashes ? 'active' : ''}" onclick="toggleLashes()">
+                        <span>👁️ Bulu Mata Lentik Gala (${mk.lashes ? 'Terpasang' : 'Pasang'})</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="panel-footer">
+                <button class="btn-royal btn-prev" onclick="goToStep(0)">← Perawatan</button>
+                <button class="btn-royal btn-next" onclick="goToStep(2)">Lanjut ke Rambut →</button>
+            </div>
+        `;
+    } else if (step === 2) {
+        const hr = gameState.hair;
+        panel.innerHTML = `
+            <div>
+                <div class="panel-header">
+                    <h2>3. Tata Rambut & Mahkota</h2>
+                    <p>Pilih gaya rambut kontemporer dan perhiasan warisan istana.</p>
+                </div>
+
+                <div class="control-section" style="margin-top:0.9rem;">
+                    <span class="section-label">Gaya Rambut Modern:</span>
+                    <div class="swatch-row">
+                        <button class="swatch-btn ${hr.style === 'waves' ? 'active' : ''}" onclick="setHairStyle('waves')">Hollywood Waves</button>
+                        <button class="swatch-btn ${hr.style === 'chignon' ? 'active' : ''}" onclick="setHairStyle('chignon')">Regal High Chignon</button>
+                        <button class="swatch-btn ${hr.style === 'curls' ? 'active' : ''}" onclick="setHairStyle('curls')">Half-Up Curls</button>
+                        <button class="swatch-btn ${hr.style === 'bob' ? 'active' : ''}" onclick="setHairStyle('bob')">Chic Modern Bob</button>
+                    </div>
+                </div>
+
+                <div class="control-section">
+                    <span class="section-label">Warna Rambut:</span>
+                    <div class="swatch-row">
+                        ${Object.entries(HAIR_COLORS).map(([key, val]) => `
+                            <button class="swatch-btn ${hr.color === key ? 'active' : ''}" onclick="setHairColor('${key}')">
+                                <span class="color-dot" style="background:${val.stops[0]}"></span>${val.name}
+                            </button>
+                        `).join('')}
+                    </div>
+                </div>
+
+                <div class="control-section">
+                    <span class="section-label">Mahkota & Tiara:</span>
+                    <div class="swatch-row">
+                        <button class="swatch-btn ${hr.tiara === 'diamond' ? 'active' : ''}" onclick="setTiara('diamond')">💎 Diamond Tiara</button>
+                        <button class="swatch-btn ${hr.tiara === 'pearl' ? 'active' : ''}" onclick="setTiara('pearl')">👑 Pearl & Gold Crown</button>
+                        <button class="swatch-btn ${hr.tiara === 'none' ? 'active' : ''}" onclick="setTiara('none')">Tanpa Mahkota</button>
+                    </div>
+                </div>
+
+                <div class="control-section">
+                    <span class="section-label">Perhiasan Berlian & Zamrud:</span>
+                    <div class="swatch-row">
+                        <button class="swatch-btn ${hr.jewelry === 'emerald' ? 'active' : ''}" onclick="setJewelry('emerald')">💚 Anting Zamrud</button>
+                        <button class="swatch-btn ${hr.jewelry === 'choker' ? 'active' : ''}" onclick="setJewelry('choker')">✨ Diamond Choker</button>
+                        <button class="swatch-btn ${hr.jewelry === 'none' ? 'active' : ''}" onclick="setJewelry('none')">Minimalis</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel-footer">
+                <button class="btn-royal btn-prev" onclick="goToStep(1)">← Riasan</button>
+                <button class="btn-royal btn-next" onclick="goToStep(3)">Lanjut ke Busana →</button>
+            </div>
+        `;
+    } else if (step === 3) {
+        const fs = gameState.fashion;
+        panel.innerHTML = `
+            <div>
+                <div class="panel-header">
+                    <h2>4. Busana Kerajaan Modern</h2>
+                    <p>Pilih rancangan adibusana untuk tampil memukau di Perjamuan Gala.</p>
+                </div>
+
+                <div class="control-section" style="margin-top:0.9rem;">
+                    <span class="section-label">Koleksi Royal Atelier:</span>
+                    <div class="tool-grid">
+                        <button class="tool-card ${fs.gown === 'champagne' ? 'active' : ''}" onclick="setGown('champagne')">
+                            <div class="tool-icon">🥂</div>
+                            <div class="tool-meta">
+                                <strong>Champagne Silk</strong>
+                                <span>Gaun off-shoulder sutra</span>
+                            </div>
+                        </button>
+                        <button class="tool-card ${fs.gown === 'emerald' ? 'active' : ''}" onclick="setGown('emerald')">
+                            <div class="tool-icon">🦚</div>
+                            <div class="tool-meta">
+                                <strong>Emerald Velvet</strong>
+                                <span>Gaun beludru aksen emas</span>
+                            </div>
+                        </button>
+                        <button class="tool-card ${fs.gown === 'suit' ? 'active' : ''}" onclick="setGown('suit')">
+                            <div class="tool-icon">🤍</div>
+                            <div class="tool-meta">
+                                <strong>White Royal Suit</strong>
+                                <span>Setelan modern & tegas</span>
+                            </div>
+                        </button>
+                        <button class="tool-card ${fs.gown === 'midnight' ? 'active' : ''}" onclick="setGown('midnight')">
+                            <div class="tool-icon">🌌</div>
+                            <div class="tool-meta">
+                                <strong>Midnight Starlight</strong>
+                                <span>Gaun malam bertabur bintang</span>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="control-section">
+                    <span class="section-label">Aksesori Gala:</span>
+                    <div class="swatch-row">
+                        <button class="swatch-btn ${fs.gloves ? 'active' : ''}" onclick="toggleGloves()">
+                            🧤 Sarung Tangan Sutra (${fs.gloves ? 'Dipakai' : 'Tambah'})
+                        </button>
+                        <button class="swatch-btn ${fs.clutch ? 'active' : ''}" onclick="toggleClutch()">
+                            👛 Royal Gold Clutch (${fs.clutch ? 'Dibawa' : 'Tambah'})
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel-footer">
+                <button class="btn-royal btn-prev" onclick="goToStep(2)">← Rambut</button>
+                <button class="btn-royal btn-next" onclick="goToStep(4)">Pilih Pasangan Kerajaan →</button>
+            </div>
+        `;
+    } else if (step === 4) {
+        const selectedId = gameState.escort;
+        panel.innerHTML = `
+            <div>
+                <div class="panel-header">
+                    <h2>5. Pilih Pasangan Kerajaan</h2>
+                    <p>Pilih bangsawan atau ksatria modern yang akan mendampingi Ratu Eleanor di karpet merah.</p>
+                </div>
+
+                <div class="control-section" style="margin-top:0.85rem;">
+                    <div class="tool-grid">
+                        ${Object.values(ROYAL_ESCORTS).map(person => `
+                            <button class="escort-card ${selectedId === person.id ? 'active' : ''}" onclick="selectRoyalEscort('${person.id}')">
+                                <div class="escort-card-top">
+                                    <div class="escort-avatar-badge" style="background:${person.badgeColor}">${person.icon}</div>
+                                    <div class="escort-meta">
+                                        <strong>${person.name}</strong>
+                                        <span>${person.title}</span>
+                                    </div>
+                                </div>
+                                <p class="escort-desc">${person.desc}</p>
+                            </button>
+                        `).join('')}
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel-footer">
+                <button class="btn-royal btn-prev" onclick="goToStep(3)">← Busana</button>
+                <button class="btn-royal btn-next" onclick="goToStep(5)">Masuki Karpet Merah Gala! ✨</button>
+            </div>
+        `;
+    } else if (step === 5) {
+        const scoreData = calculateRoyalScore();
+        const partner = ROYAL_ESCORTS[gameState.escort];
+        panel.innerHTML = `
+            <div>
+                <div class="panel-header">
+                    <h2>Grand Finale • Karpet Merah Gala</h2>
+                    <p>Sorotan kamera dan tepuk tangan para diplomat menyambut Ratu Eleanor & pendampingnya!</p>
+                </div>
+
+                <div class="finale-card" style="margin-top:0.85rem;">
+                    <span class="rank-badge">${scoreData.rank}</span>
+                    <h3>"${scoreData.title}"</h3>
+                    <div class="couple-title-tag">👑 Ratu Eleanor & ${partner.name}</div>
+                    <p style="font-size:0.82rem; color:var(--text-muted); margin-top:0.65rem; line-height:1.5;">${scoreData.comment}</p>
+
+                    <div class="score-pills">
+                        <div class="score-item">
+                            <strong>${scoreData.glowPct}%</strong>
+                            <span>Skin Glow</span>
+                        </div>
+                        <div class="score-item">
+                            <strong>${scoreData.elegance}/100</strong>
+                            <span>Royal Glam</span>
+                        </div>
+                        <div class="score-item">
+                            <strong>${scoreData.total}</strong>
+                            <span>Total Skor</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel-footer">
+                <button class="btn-royal btn-prev" onclick="triggerGalaFinaleEffects()">📸 Kilat Foto</button>
+                <button class="btn-royal btn-next" onclick="resetEntireGame()">Ulangi Makeover ↻</button>
+            </div>
+        `;
+    }
+}
+
+/**
+ * ============================================================================
+ * 6. HANDLER AKSI TIAP TAHAP & PENILAIAN FINALE
+ * ============================================================================
+ */
+function selectSkincareTool(toolName) {
+    gameState.activeSkincareTool = toolName;
+    renderStudioPanel();
+}
+
+function quickAutoSkincare() {
+    gameState.skincare.cleanserDone = true;
+    gameState.skincare.blemishesHealed = 5;
+    gameState.skincare.maskDone = true;
+    gameState.skincare.eyeCreamDone = true;
+    document.querySelectorAll('.blemish').forEach(b => {
+        b.classList.add('healed');
+        b.style.opacity = '0';
+    });
+    synth.playSparkleSfx();
+    spawnSparkles(200, 180, '#F5D384', 18);
+    setDialogue('👑 Ratu Eleanor', '"Luar biasa! Kulit wajahku langsung mulus dan bercahaya seperti habis perawatan spa kerajaan."');
+    updateQueenVisuals();
+    renderStudioPanel();
+}
+
+function setEyeshadow(name, color) {
+    gameState.makeup.eyeshadow = { name, color, opacity: 0.55 };
+    synth.playSparkleSfx();
+    updateQueenVisuals();
+    renderStudioPanel();
+}
+
+function setBlush(name, color) {
+    gameState.makeup.blush = { name, color, opacity: 0.45 };
+    synth.playSparkleSfx();
+    updateQueenVisuals();
+    renderStudioPanel();
+}
+
+function setLipstick(name, upper, lower) {
+    gameState.makeup.lipstick = { name, upper, lower };
+    synth.playSparkleSfx();
+    updateQueenVisuals();
+    renderStudioPanel();
+}
+
+function toggleLashes() {
+    gameState.makeup.lashes = !gameState.makeup.lashes;
+    synth.playSparkleSfx();
+    updateQueenVisuals();
+    renderStudioPanel();
+}
+
+function setHairStyle(style) {
+    gameState.hair.style = style;
+    synth.playSparkleSfx();
+    updateQueenVisuals();
+    renderStudioPanel();
+}
+
+function setHairColor(color) {
+    gameState.hair.color = color;
+    synth.playSparkleSfx();
+    updateQueenVisuals();
+    renderStudioPanel();
+}
+
+function setTiara(tiara) {
+    gameState.hair.tiara = tiara;
+    synth.playSparkleSfx();
+    updateQueenVisuals();
+    renderStudioPanel();
+}
+
+function setJewelry(jewelry) {
+    gameState.hair.jewelry = jewelry;
+    synth.playSparkleSfx();
+    updateQueenVisuals();
+    renderStudioPanel();
+}
+
+function setGown(gown) {
+    gameState.fashion.gown = gown;
+    synth.playSparkleSfx();
+    updateQueenVisuals();
+    renderStudioPanel();
+}
+
+function toggleGloves() {
+    gameState.fashion.gloves = !gameState.fashion.gloves;
+    synth.playSparkleSfx();
+    updateQueenVisuals();
+    renderStudioPanel();
+}
+
+function toggleClutch() {
+    gameState.fashion.clutch = !gameState.fashion.clutch;
+    synth.playSparkleSfx();
+    updateQueenVisuals();
+    renderStudioPanel();
+}
+
+function selectRoyalEscort(escortId) {
+    gameState.escort = escortId;
+    const chosen = ROYAL_ESCORTS[escortId];
+    synth.playSparkleSfx();
+    spawnSparkles(340, 200, '#DFC08A', 12);
+    setDialogue(`🎩 ${chosen.name}`, chosen.quote);
+    updateQueenVisuals();
+    renderStudioPanel();
+}
+
+function calculateRoyalScore() {
+    const glowPct = getSkincarePercent();
+    const partner = ROYAL_ESCORTS[gameState.escort] || ROYAL_ESCORTS.alistair;
+    let elegance = 56 + partner.bonusElegance;
+    if (gameState.makeup.eyeshadow.opacity > 0) elegance += 7;
+    if (gameState.makeup.blush.opacity > 0) elegance += 6;
+    if (gameState.makeup.lashes) elegance += 5;
+    if (gameState.hair.tiara !== 'none') elegance += 7;
+    if (gameState.hair.jewelry !== 'none') elegance += 4;
+    if (gameState.fashion.gown !== 'robe') elegance += 9;
+
+    elegance = Math.min(100, elegance);
+    const total = Math.round((glowPct * 0.45) + (elegance * 0.55));
+
+    let rank = 'A-RANK • ROYAL GRACE';
+    let title = partner.galaTitle;
+    let comment = `Madame Claire: "Penampilan Ratu Eleanor bersama ${partner.name} sangat serasi dan memikat perhatian seluruh tamu kehormatan malam ini!"`;
+
+    if (total >= 92) {
+        rank = 'S+ RANK • ICONIC MODERN QUEEN';
+        title = `${partner.galaTitle} (Sempurna)`;
+        comment = `Madame Claire: "Luar biasa! Kulit sehat glowing sang Ratu berpadu sempurna dengan gaun adibusana dan kharisma ${partner.name}!"`;
+    } else if (total < 75) {
+        rank = 'B-RANK • CHIC PRINCESS';
+        title = 'Pesona Klasik Sederhana';
+        comment = `Madame Claire: "Tampil manis bersama ${partner.name}! Lengkapi skincare dan aksesori kerajaan untuk meraih peringkat S+."`;
+    }
+
+    return { glowPct, elegance, total, rank, title, comment };
+}
+
+function triggerGalaFinaleEffects() {
+    const flash = document.getElementById('camera-flash');
+    flash.classList.remove('flash-anim');
+    void flash.offsetWidth; // trigger reflow
+    flash.classList.add('flash-anim');
+
+    const partner = ROYAL_ESCORTS[gameState.escort] || ROYAL_ESCORTS.alistair;
+    synth.playSparkleSfx();
+    spawnSparkles(120, 140, '#FFF2CC', 12);
+    spawnSparkles(280, 160, '#DFC08A', 12);
+    spawnSparkles(410, 180, '#F7A8B8', 12);
+
+    setDialogue(`👑 Ratu Eleanor & ${partner.name}`, `"Terima kasih telah mempersiapkan malam terindah ini! Kami siap menyapa seluruh tamu di Grand Banquet London."`);
+}
+
+function resetEntireGame() {
+    gameState.currentStep = 0;
+    gameState.activeSkincareTool = 'cleanser';
+    gameState.skincare = { cleanserDone: false, blemishesHealed: 0, maskDone: false, eyeCreamDone: false };
+    gameState.makeup = {
+        eyeshadow: { name: 'Champagne Gold', color: '#D4AF7A', opacity: 0 },
+        blush: { name: 'Rosy Glow', color: '#E68A99', opacity: 0 },
+        lipstick: { name: 'Natural Rose', upper: '#C97C7C', lower: '#D68A8A' },
+        lashes: false
+    };
+    gameState.hair = { style: 'waves', color: 'chestnut', tiara: 'none', jewelry: 'none' };
+    gameState.fashion = { gown: 'robe', gloves: false, clutch: false };
+    gameState.escort = 'alistair';
+
+    // Reset kulit dan jerawat
+    document.getElementById('skin-stop-1').setAttribute('stop-color', '#E8C3B0');
+    document.getElementById('skin-stop-2').setAttribute('stop-color', '#D9AC96');
+    document.querySelectorAll('.blemish').forEach(b => {
+        b.classList.remove('healed');
+        b.style.opacity = '1';
+        b.style.transform = b.getAttribute('transform');
+    });
+
+    updateQueenVisuals();
+    goToStep(0);
+}
+
+/**
+ * ============================================================================
+ * 7. INISIALISASI EVENT LISTENER UTAMA
+ * ============================================================================
+ */
+document.getElementById('btn-start-game').addEventListener('click', () => {
+    document.getElementById('intro-modal').classList.add('hidden');
+    synth.start();
+    goToStep(0);
+});
+
+document.getElementById('btn-music-toggle').addEventListener('click', () => {
+    synth.toggle();
+});
+
+document.querySelectorAll('.step-pill').forEach(pill => {
+    pill.addEventListener('click', () => {
+        const step = parseInt(pill.dataset.step, 10);
+        goToStep(step);
+    });
+});
+
+// Render awal saat halaman selesai dimuat
+window.addEventListener('DOMContentLoaded', () => {
+    updateQueenVisuals();
+    renderStudioPanel();
+});
+</script>
+
+</body>
+</html>
